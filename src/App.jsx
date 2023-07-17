@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import "./reset.css";
+import { Routes, Route } from "react-router-dom";
+import styled from "styled-components";
+import Home from "./components/Home";
+import HeaderNav from "./components/HeaderNav";
+import SecondaryNav from "./components/SecondaryNav";
+
+const AppContainer = styled.div`
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "secondary";
+  justify-content: center;
+
+  @media screen and (min-width: 769px) {
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "header header" "secondary main";
+  }
+`;
+
+const StyledMain = styled.main`
+  grid-area: main;
+  overflow: auto;
+`;
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <AppContainer>
+      <HeaderNav />
+      <StyledMain>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </StyledMain>
+      <SecondaryNav />
+    </AppContainer>
+  );
 }
 
-export default App
+export default App;
