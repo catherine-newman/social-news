@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { formatDate } from "../utilities/formatDate";
 
 const Card = styled.div`
-  border: red solid 1px;
+  //   border: red solid 1px;
   width: 100%;
 `;
 

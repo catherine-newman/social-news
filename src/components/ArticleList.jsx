@@ -8,6 +8,10 @@ const StyledUL = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2em;
+  justify-items: center;
 `;
 
 const ArticleList = () => {
@@ -19,6 +23,7 @@ const ArticleList = () => {
     setArticles([...articles, ...res.articles]);
     setPage(page + 1);
     setTotalArticles(res.total_count);
+    console.log(articles.length);
   };
 
   useEffect(() => {

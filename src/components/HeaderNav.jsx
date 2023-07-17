@@ -1,9 +1,11 @@
+import styled from "styled-components";
+
+const StyledHeaderNav = styled.header`
+  grid-area: header;
+`;
+
 const HeaderNav = () => {
-  return (
-    <>
-      <nav>Header</nav>
-    </>
-  );
+  return <StyledHeaderNav>Header</StyledHeaderNav>;
 };
 
 export default HeaderNav;
