@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledNav = styled.nav`
-  grid-area: secondary;
-  overflow: auto;
+  // flex: 0 0 312px;
 `;
 
 const SecondaryNav = () => {

@@ -3,8 +3,16 @@ import { Link } from "react-router-dom";
 import { formatDate } from "../utilities/formatDate";
 
 const Card = styled.div`
-  //   border: red solid 1px;
-  width: 100%;
+  background-color: #ffffff;
+  border-radius: 1em;
+  padding: 2em;
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  img {
+    border-radius: 1em;
+  }
 `;
 
 const CardHeader = styled.div`
@@ -26,12 +34,14 @@ const ArticleCard = ({ article }) => {
         </div>
         <div>{article.topic}</div>
       </CardHeader>
-      <Link to={`/${article.topic}/${article.article_id}`}>
-        <div>{article.title}</div>
-        <div>
-          <img src={article.article_img_url} />
-        </div>
-      </Link>
+      <div>
+        <Link to={`/${article.topic}/${article.article_id}`}>
+          <h2>{article.title}</h2>
+          <div>
+            <img src={article.article_img_url} />
+          </div>
+        </Link>
+      </div>
       <CardFooter>
         <div>{article.votes}</div>
         <div>{article.comment_count}</div>

@@ -4,6 +4,14 @@ import { getArticle } from "../api";
 import { formatDate } from "../utilities/formatDate";
 import styled from "styled-components";
 
+const ArticleCard = styled.div`
+  background-color: #ffffff;
+
+  img {
+    border-radius: 1em;
+  }
+`;
+
 const ArticleHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -26,7 +34,7 @@ const FullArticle = () => {
   }, [article_id]);
 
   return (
-    <div>
+    <ArticleCard>
       <ArticleHeader>
         <div>
           {article.author} {formatDate(article.created_at)}
@@ -42,7 +50,7 @@ const FullArticle = () => {
         <div>{article.votes}</div>
         <div>{article.comment_count}</div>
       </ArticleFooter>
-    </div>
+    </ArticleCard>
   );
 };
 

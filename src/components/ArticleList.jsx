@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
 import styled from "styled-components";
 import { getArticles } from "../api";
 import ArticleCard from "./ArticleCard";
+import Button from "./Button";
 
 const StyledUL = styled.ul`
   list-style-type: none;
-  margin: 0;
-  padding: 0;
   display: grid;
   grid-template-columns: 1fr;
   gap: 2em;
+  width: 640px;
+  padding: 1.5em;
 `;
 
 const ArticleList = () => {
@@ -29,14 +29,7 @@ const ArticleList = () => {
   }, []);
 
   return (
-    <InfiniteScroll
-      dataLength={articles.length}
-      next={fetchData}
-      hasMore={articles.length < totalArticles ? true : false}
-      loader={<p>Loading...</p>}
-      endMessage={<p>No more articles</p>}
-      scrollableTarget="scrollableUL"
-    >
+    <>
       <StyledUL>
         {articles.map((article) => {
           return (
@@ -45,8 +38,13 @@ const ArticleList = () => {
             </li>
           );
         })}
+        {articles.length < totalArticles ? (
+          <Button onClick={fetchData}>Load more</Button>
+        ) : (
+          "No more articles"
+        )}
       </StyledUL>
-    </InfiniteScroll>
+    </>
   );
 };
 
