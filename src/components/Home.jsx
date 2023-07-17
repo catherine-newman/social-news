@@ -1,11 +1,7 @@
 import ArticleList from "./ArticleList";
 
 const Home = () => {
-  return (
-    <main>
-      <ArticleList />
-    </main>
-  );
+  return <ArticleList />;
 };
 
 export default Home;
