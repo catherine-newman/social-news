@@ -8,6 +8,7 @@ import SecondaryNav from "./components/SecondaryNav";
 import Article from "./components/Article";
 
 const AppContainer = styled.div`
+  height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
@@ -22,6 +23,18 @@ const AppContainer = styled.div`
     grid-template-rows: auto 1fr;
     grid-template-areas: "header header" "secondary main";
   }
+
+  @media screen and (min-width: 1025px) {
+    grid-template-columns: 10% 220px 1fr 10%;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "header header header header" ". secondary main .";
+  }
+
+  @media screen and (min-width: 1201px) {
+    grid-template-columns: 15% 220px 1fr 15%;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "header header header header" ". secondary main .";
+  }
 `;
 
 const StyledMain = styled.main`
@@ -33,7 +46,7 @@ function App() {
   return (
     <AppContainer>
       <HeaderNav />
-      <StyledMain>
+      <StyledMain id="scrollableUL">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:topic/:article_id" element={<Article />} />

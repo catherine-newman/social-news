@@ -11,7 +11,6 @@ const StyledUL = styled.ul`
   display: grid;
   grid-template-columns: 1fr;
   gap: 2em;
-  justify-items: center;
 `;
 
 const ArticleList = () => {
@@ -36,6 +35,7 @@ const ArticleList = () => {
       hasMore={articles.length < totalArticles ? true : false}
       loader={<p>Loading...</p>}
       endMessage={<p>No more articles</p>}
+      scrollableTarget="scrollableUL"
     >
       <StyledUL>
         {articles.map((article) => {

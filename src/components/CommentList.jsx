@@ -11,7 +11,7 @@ const StyledUL = styled.ul`
   display: grid;
   grid-template-columns: 1fr;
   gap: 1em;
-  justify-items: center;
+  justify-items: start;
 `;
 
 const CommentList = () => {
