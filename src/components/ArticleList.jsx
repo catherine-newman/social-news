@@ -17,11 +17,15 @@ const ArticleList = () => {
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   const [totalArticles, setTotalArticles] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
   const fetchData = async () => {
+    setIsLoading(true);
     const res = await getArticles(page);
     setArticles([...articles, ...res.articles]);
     setPage(page + 1);
     setTotalArticles(res.total_count);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -38,7 +42,9 @@ const ArticleList = () => {
             </li>
           );
         })}
-        {articles.length < totalArticles ? (
+        {isLoading ? (
+          "Loading..."
+        ) : articles.length < totalArticles ? (
           <Button onClick={fetchData}>Load more</Button>
         ) : (
           "No more articles"

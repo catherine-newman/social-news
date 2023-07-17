@@ -24,14 +24,18 @@ const ArticleFooter = styled.div`
 
 const FullArticle = () => {
   const [article, setArticle] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
 
   useEffect(() => {
     (async () => {
       const res = await getArticle(article_id);
       setArticle(res);
+      setIsLoading(false);
     })();
   }, [article_id]);
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <ArticleCard>
