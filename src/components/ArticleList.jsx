@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
+import styled from "styled-components";
 import { getArticles } from "../api";
 import ArticleCard from "./ArticleCard";
+
+const StyledUL = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+`;
 
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
@@ -27,17 +33,15 @@ const ArticleList = () => {
       loader={<p>Loading...</p>}
       endMessage={<p>No more articles</p>}
     >
-      <ul>
+      <StyledUL>
         {articles.map((article) => {
           return (
             <li key={article.article_id}>
-              <Link to={`/${article.topic}/${article.article_id}`}>
-                <ArticleCard article={article} />
-              </Link>
+              <ArticleCard article={article} />
             </li>
           );
         })}
-      </ul>
+      </StyledUL>
     </InfiniteScroll>
   );
 };

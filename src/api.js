@@ -6,6 +6,5 @@ const newsApi = axios.create({
 
 export const getArticles = async (page) => {
   const res = await newsApi.get(`/articles?p=${page}&total_count=true`);
-  console.log(res.data);
   return res.data;
 };
