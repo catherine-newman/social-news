@@ -6,23 +6,18 @@ import ArticleCard from "./ArticleCard";
 
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalArticles, setTotalArticles] = useState(0);
   const fetchData = async () => {
-    setIsLoading(true);
     const res = await getArticles(page);
     setArticles([...articles, ...res.articles]);
     setPage(page + 1);
     setTotalArticles(res.total_count);
-    setIsLoading(false);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-
-  //   if (isLoading) return <p>Loading...</p>;
 
   return (
     <InfiniteScroll

@@ -1,9 +1,11 @@
+import { formatDate } from "../utilities/formatDate";
+
 const ArticleCard = ({ article }) => {
   return (
     <>
       <div>
         <div>
-          {article.author} {article.created_at}
+          {article.author} {formatDate(article.created_at)}
         </div>
         <div>{article.topic}</div>
       </div>

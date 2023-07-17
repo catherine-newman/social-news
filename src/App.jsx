@@ -1,4 +1,5 @@
 import "./App.css";
+import "./reset.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import HeaderNav from "./components/HeaderNav";
