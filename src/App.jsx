@@ -5,9 +5,9 @@ import styled from "styled-components";
 import Home from "./components/Home";
 import HeaderNav from "./components/HeaderNav";
 import SecondaryNav from "./components/SecondaryNav";
+import Article from "./components/Article";
 
 const AppContainer = styled.div`
-  height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
@@ -36,6 +36,7 @@ function App() {
       <StyledMain>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/:topic/:article_id" element={<Article />} />
         </Routes>
       </StyledMain>
       <SecondaryNav />
