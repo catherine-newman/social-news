@@ -10,7 +10,8 @@ const StyledUL = styled.ul`
   grid-template-columns: 1fr;
   gap: 2em;
   width: 640px;
-  padding: 1.5em;
+  padding: 0;
+  margin-top: 2em;
 `;
 
 const ArticleList = () => {

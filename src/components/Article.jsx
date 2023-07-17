@@ -11,7 +11,7 @@ const Container = styled.div`
   width: 640px;
   padding: 2em;
   background-color: #ffffff;
-  margin-top: 1.5em;
+  margin-top: 2em;
   border-radius: 1em;
 `;
 
