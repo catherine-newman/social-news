@@ -11,6 +11,10 @@ export const getArticles = async (page) => {
 
 export const getArticle = async (article_id) => {
   const res = await newsApi.get(`/articles/${article_id}`);
-  console.log(res.data.article);
   return res.data.article;
+};
+
+export const getComments = async (article_id) => {
+  const res = await newsApi.get(`/articles/${article_id}/comments`);
+  return res.data.comments;
 };
