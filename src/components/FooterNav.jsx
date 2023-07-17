@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
+
 const FooterNav = () => {
   return (
     <>
-      <nav>Footer</nav>
+      <nav>
+        <Link to="/">Home</Link>
+      </nav>
     </>
   );
 };
