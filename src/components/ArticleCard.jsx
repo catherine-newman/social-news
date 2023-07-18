@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { formatDate } from "../utilities/formatDate";
+import { patchArticle } from "../api";
+import { toast } from "react-toastify";
+import ArticleVote from "./ArticleVote";
+import { useState } from "react";
 
 const Card = styled.div`
   background-color: #ffffff;
@@ -26,6 +30,36 @@ const CardFooter = styled.div`
 `;
 
 const ArticleCard = ({ article }) => {
+  const [voteCount, setVoteCount] = useState(article.votes);
+
+  const handleUpVote = () => {
+    const newCount = voteCount + 1;
+    setVoteCount(newCount);
+    (async () => {
+      try {
+        const res = await patchArticle(article.article_id, 1);
+        setVoteCount(res.votes);
+      } catch (err) {
+        toast.error("Oops! Something went wrong...");
+        setVoteCount(voteCount);
+      }
+    })();
+  };
+
+  const handleDownVote = () => {
+    const newCount = voteCount - 1;
+    setVoteCount(newCount);
+    (async () => {
+      try {
+        const res = await patchArticle(article.article_id, -1);
+        setVoteCount(res.votes);
+      } catch (err) {
+        toast.error("Oops! Something went wrong...");
+        setVoteCount(voteCount);
+      }
+    })();
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -43,7 +77,11 @@ const ArticleCard = ({ article }) => {
         </Link>
       </div>
       <CardFooter>
-        <div>{article.votes}</div>
+        <ArticleVote
+          votes={voteCount}
+          handleUpVote={handleUpVote}
+          handleDownVote={handleDownVote}
+        />
         <div>{article.comment_count}</div>
       </CardFooter>
     </Card>

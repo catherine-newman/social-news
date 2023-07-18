@@ -48,6 +48,7 @@ const FullArticle = () => {
         setVoteCount(res.votes);
       } catch (err) {
         toast.error("Oops! Something went wrong...");
+        setVoteCount(voteCount);
       }
     })();
   };
@@ -61,6 +62,7 @@ const FullArticle = () => {
         setVoteCount(res.votes);
       } catch (err) {
         toast.error("Oops! Something went wrong...");
+        setVoteCount(voteCount);
       }
     })();
   };
