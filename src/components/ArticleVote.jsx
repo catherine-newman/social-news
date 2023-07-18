@@ -8,22 +8,14 @@ const StyledDiv = styled.div`
   align-items: center;
 `;
 
-const StyledFaArrowUp = styled(FaArrowUp).attrs((props) => ({
-  className: props.clicked ? "clicked" : "",
-}))`
+const StyledFaArrowUp = styled(FaArrowUp)`
   cursor: pointer;
-  &.clicked {
-    color: #7a82e4;
-  }
+  color: ${(props) => (props.$clicked ? "#7a82e4" : "black")};
 `;
 
-const StyledFaArrowDown = styled(FaArrowDown).attrs((props) => ({
-  className: props.clicked ? "clicked" : "",
-}))`
+const StyledFaArrowDown = styled(FaArrowDown)`
   cursor: pointer;
-  &.clicked {
-    color: #7a82e4;
-  }
+  color: ${(props) => (props.$clicked ? "#7a82e4" : "black")};
 `;
 
 const ArticleVote = ({
@@ -36,9 +28,12 @@ const ArticleVote = ({
   return (
     <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
       <StyledDiv>
-        <StyledFaArrowUp onClick={handleUpVote} clicked={upVoteClicked} />{" "}
+        <StyledFaArrowUp onClick={handleUpVote} $clicked={+upVoteClicked} />{" "}
         {votes}{" "}
-        <StyledFaArrowDown onClick={handleDownVote} clicked={downVoteClicked} />
+        <StyledFaArrowDown
+          onClick={handleDownVote}
+          $clicked={+downVoteClicked}
+        />
       </StyledDiv>
     </IconContext.Provider>
   );
