@@ -30,6 +30,8 @@ const FullArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
   const [voteCount, setVoteCount] = useState(0);
+  const [upVoteClicked, setUpVoteClicked] = useState(false);
+  const [downVoteClicked, setDownVoteClicked] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -40,32 +42,62 @@ const FullArticle = () => {
     })();
   }, [article_id]);
 
+  const upVote = async (vote) => {
+    try {
+      const res = await patchArticle(article_id, vote);
+      setVoteCount(res.votes);
+      setDownVoteClicked(false);
+    } catch (err) {
+      toast.error("Oops! Something went wrong...");
+      setVoteCount(voteCount);
+      setUpVoteClicked(false);
+    }
+  };
+
+  const downVote = async (vote) => {
+    try {
+      const res = await patchArticle(article_id, vote);
+      setVoteCount(res.votes);
+      setUpVoteClicked(false);
+    } catch (err) {
+      toast.error("Oops! Something went wrong...");
+      setVoteCount(voteCount);
+      setDownVoteClicked(false);
+    }
+  };
+
   const handleUpVote = () => {
-    const newCount = voteCount + 1;
-    setVoteCount(newCount);
-    (async () => {
-      try {
-        const res = await patchArticle(article_id, 1);
-        setVoteCount(res.votes);
-      } catch (err) {
-        toast.error("Oops! Something went wrong...");
-        setVoteCount(voteCount);
+    if (upVoteClicked) {
+      downVote(-1);
+    } else {
+      setUpVoteClicked(true);
+      if (downVoteClicked) {
+        const newCount = voteCount + 2;
+        setVoteCount(newCount);
+        upVote(2);
+      } else {
+        const newCount = voteCount + 1;
+        setVoteCount(newCount);
+        upVote(1);
       }
-    })();
+    }
   };
 
   const handleDownVote = () => {
-    const newCount = voteCount - 1;
-    setVoteCount(newCount);
-    (async () => {
-      try {
-        const res = await patchArticle(article_id, -1);
-        setVoteCount(res.votes);
-      } catch (err) {
-        toast.error("Oops! Something went wrong...");
-        setVoteCount(voteCount);
+    if (downVoteClicked) {
+      upVote(1);
+    } else {
+      setDownVoteClicked(true);
+      if (upVoteClicked) {
+        const newCount = voteCount - 2;
+        setVoteCount(newCount);
+        downVote(-2);
+      } else {
+        const newCount = voteCount - 1;
+        setVoteCount(newCount);
+        downVote(-1);
       }
-    })();
+    }
   };
 
   if (isLoading) return <p>Loading article...</p>;
@@ -89,6 +121,8 @@ const FullArticle = () => {
             votes={voteCount}
             handleUpVote={handleUpVote}
             handleDownVote={handleDownVote}
+            upVoteClicked={upVoteClicked}
+            downVoteClicked={downVoteClicked}
           />
           <div>{article.comment_count}</div>
         </ArticleFooter>
