@@ -1,29 +1,32 @@
 import { useState, useEffect } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
 import styled from "styled-components";
 import { getArticles } from "../api";
 import ArticleCard from "./ArticleCard";
+import Button from "./Button";
 
 const StyledUL = styled.ul`
   list-style-type: none;
-  margin: 0;
-  padding: 0;
   display: grid;
   grid-template-columns: 1fr;
   gap: 2em;
-  justify-items: center;
+  width: 640px;
+  padding: 0;
+  margin-top: 2em;
 `;
 
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   const [totalArticles, setTotalArticles] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
   const fetchData = async () => {
+    setIsLoading(true);
     const res = await getArticles(page);
     setArticles([...articles, ...res.articles]);
     setPage(page + 1);
     setTotalArticles(res.total_count);
-    console.log(articles.length);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -31,13 +34,7 @@ const ArticleList = () => {
   }, []);
 
   return (
-    <InfiniteScroll
-      dataLength={articles.length}
-      next={fetchData}
-      hasMore={articles.length < totalArticles ? true : false}
-      loader={<p>Loading...</p>}
-      endMessage={<p>No more articles</p>}
-    >
+    <>
       <StyledUL>
         {articles.map((article) => {
           return (
@@ -46,8 +43,15 @@ const ArticleList = () => {
             </li>
           );
         })}
+        {isLoading ? (
+          "Loading..."
+        ) : articles.length < totalArticles ? (
+          <Button onClick={fetchData}>Load more</Button>
+        ) : (
+          "No more articles"
+        )}
       </StyledUL>
-    </InfiniteScroll>
+    </>
   );
 };
 
