@@ -5,7 +5,7 @@ import { formatDate } from "../utilities/formatDate";
 import styled from "styled-components";
 import ArticleVote from "./ArticleVote";
 import { toast } from "react-toastify";
-import Button from "./Button";
+import AddComment from "./AddComment";
 
 const ArticleCard = styled.div`
   background-color: #ffffff;
@@ -139,7 +139,7 @@ const FullArticle = () => {
           <div>{article.comment_count}</div>
         </ArticleFooter>
       </ArticleCard>
-      <Button>Add Comment</Button>
+      <AddComment />
     </>
   );
 };
