@@ -25,7 +25,7 @@ const ArticleFooter = styled.div`
   justify-content: space-evenly;
 `;
 
-const FullArticle = ({ comments, setComments }) => {
+const FullArticle = ({ setCommentSubmit }) => {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
@@ -141,8 +141,7 @@ const FullArticle = ({ comments, setComments }) => {
       </ArticleCard>
       <AddComment
         article_id={article.article_id}
-        comments={comments}
-        setComments={setComments}
+        setCommentSubmit={setCommentSubmit}
       />
     </>
   );

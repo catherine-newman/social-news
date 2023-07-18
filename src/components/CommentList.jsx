@@ -14,17 +14,19 @@ const StyledUL = styled.ul`
   justify-items: start;
 `;
 
-const CommentList = ({ comments, setComments }) => {
+const CommentList = ({ commentSubmit, setCommentSubmit }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     (async () => {
       const res = await getComments(article_id);
       setComments(res);
       setIsLoading(false);
+      setCommentSubmit(false);
     })();
-  }, []);
+  }, [commentSubmit]);
 
   if (isLoading) return <p>Loading comments...</p>;
 

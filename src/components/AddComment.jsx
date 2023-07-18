@@ -10,6 +10,7 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 0.2em;
+  justify-content: space-between;
 `;
 
 const StyledTextArea = styled.textarea`
@@ -29,12 +30,12 @@ const StyledSubmitButton = styled(Button)`
   }
 `;
 
-const AddComment = ({ article_id, comments, setComments }) => {
+const AddComment = ({ article_id, setCommentSubmit }) => {
   const [formDisplay, setFormDisplay] = useState(false);
   const { user } = useContext(UserContext);
   const [inputBox, setInputBox] = useState("");
-  const [comment, setComment] = useState();
   const [submitDisabled, setSubmitDisabled] = useState(true);
+  const [comment, setComment] = useState();
 
   const handleButtonClick = () => {
     setFormDisplay(true);
@@ -42,7 +43,7 @@ const AddComment = ({ article_id, comments, setComments }) => {
 
   const handleChange = (event) => {
     setInputBox(event.target.value);
-    if (event.target.value.length >= 1) {
+    if (event.target.value.length >= 1 && event.target.value.length <= 500) {
       setSubmitDisabled(false);
     } else {
       setSubmitDisabled(true);
@@ -71,6 +72,7 @@ const AddComment = ({ article_id, comments, setComments }) => {
       toast.success("Comment posted!");
       setFormDisplay(false);
       setSubmitDisabled(false);
+      setCommentSubmit(true);
     } catch (err) {
       toast.error("Oops! Something went wrong...");
       setSubmitDisabled(false);

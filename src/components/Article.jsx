@@ -16,11 +16,14 @@ const Container = styled.div`
 `;
 
 const Article = () => {
-  const [comments, setComments] = useState([]);
+  const [commentSubmit, setCommentSubmit] = useState(false);
   return (
     <Container>
-      <FullArticle comments={comments} setComments={setComments} />
-      <CommentList comments={comments} setComments={setComments} />
+      <FullArticle setCommentSubmit={setCommentSubmit} />
+      <CommentList
+        commentSubmit={commentSubmit}
+        setCommentSubmit={setCommentSubmit}
+      />
     </Container>
   );
 };
