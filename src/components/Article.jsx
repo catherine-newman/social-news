@@ -1,11 +1,12 @@
 import FullArticle from "./FullArticle";
 import CommentList from "./CommentList";
 import styled from "styled-components";
+import { useState } from "react";
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2em;
+  gap: 1em;
   justify-items: center;
   width: 640px;
   padding: 2em;
@@ -15,10 +16,11 @@ const Container = styled.div`
 `;
 
 const Article = () => {
+  const [comments, setComments] = useState([]);
   return (
     <Container>
-      <FullArticle />
-      <CommentList />
+      <FullArticle comments={comments} setComments={setComments} />
+      <CommentList comments={comments} setComments={setComments} />
     </Container>
   );
 };

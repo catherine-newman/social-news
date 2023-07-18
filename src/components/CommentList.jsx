@@ -14,8 +14,7 @@ const StyledUL = styled.ul`
   justify-items: start;
 `;
 
-const CommentList = () => {
-  const [comments, setComments] = useState([]);
+const CommentList = ({ comments, setComments }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
 
@@ -25,7 +24,7 @@ const CommentList = () => {
       setComments(res);
       setIsLoading(false);
     })();
-  }, [article_id]);
+  }, []);
 
   if (isLoading) return <p>Loading comments...</p>;
 
