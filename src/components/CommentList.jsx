@@ -29,6 +29,8 @@ const CommentList = () => {
 
   if (isLoading) return <p>Loading...</p>;
 
+  if (comments.length === 0) return <p>No comments</p>;
+
   return (
     <StyledUL>
       {comments.map((comment) => {
