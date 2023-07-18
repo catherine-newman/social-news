@@ -22,18 +22,36 @@ const StyledTextArea = styled.textarea`
   padding: 0.5em 1em;
 `;
 
+const StyledSubmitButton = styled(Button)`
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #cacdf7;
+  }
+`;
+
 const AddComment = ({ article_id, comments, setComments }) => {
   const [formDisplay, setFormDisplay] = useState(false);
   const { user } = useContext(UserContext);
   const [inputBox, setInputBox] = useState("");
   const [comment, setComment] = useState();
+  const [submitDisabled, setSubmitDisabled] = useState(true);
 
   const handleButtonClick = () => {
     setFormDisplay(true);
   };
 
+  const handleChange = (event) => {
+    setInputBox(event.target.value);
+    if (event.target.value.length >= 1) {
+      setSubmitDisabled(false);
+    } else {
+      setSubmitDisabled(true);
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    setSubmitDisabled(true);
     setComment(() => {
       return inputBox;
     });
@@ -51,8 +69,11 @@ const AddComment = ({ article_id, comments, setComments }) => {
     try {
       await postComment(article_id, user, comment);
       toast.success("Comment posted!");
+      setFormDisplay(false);
+      setSubmitDisabled(false);
     } catch (err) {
       toast.error("Oops! Something went wrong...");
+      setSubmitDisabled(false);
     }
   };
 
@@ -70,10 +91,12 @@ const AddComment = ({ article_id, comments, setComments }) => {
         minLength={1}
         spellCheck="true"
         placeholder="What do you think?"
-        onChange={(event) => setInputBox(event.target.value)}
+        onChange={handleChange}
         value={inputBox}
       ></StyledTextArea>
-      <Button type="submit">Comment</Button>
+      <StyledSubmitButton type="submit" disabled={submitDisabled}>
+        Comment
+      </StyledSubmitButton>
     </StyledForm>
   );
 };
