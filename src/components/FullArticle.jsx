@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getArticle } from "../api";
 import { formatDate } from "../utilities/formatDate";
 import styled from "styled-components";
+import ArticleVote from "./ArticleVote";
 
 const ArticleCard = styled.div`
   background-color: #ffffff;
@@ -51,7 +52,7 @@ const FullArticle = () => {
         <p>{article.body}</p>
       </article>
       <ArticleFooter>
-        <div>{article.votes}</div>
+        <ArticleVote />
         <div>{article.comment_count}</div>
       </ArticleFooter>
     </ArticleCard>
