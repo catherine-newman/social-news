@@ -27,7 +27,7 @@ const CommentList = () => {
     })();
   }, [article_id]);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading comments...</p>;
 
   if (comments.length === 0) return <p>No comments</p>;
 

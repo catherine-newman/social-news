@@ -5,6 +5,7 @@ import { formatDate } from "../utilities/formatDate";
 import styled from "styled-components";
 import ArticleVote from "./ArticleVote";
 import { toast } from "react-toastify";
+import Button from "./Button";
 
 const ArticleCard = styled.div`
   background-color: #ffffff;
@@ -67,30 +68,33 @@ const FullArticle = () => {
     })();
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading article...</p>;
 
   return (
-    <ArticleCard>
-      <ArticleHeader>
-        <div>
-          {article.author} {formatDate(article.created_at)}
-        </div>
-        <div>{article.topic}</div>
-      </ArticleHeader>
-      <article>
-        <h1>{article.title}</h1>
-        <img src={article.article_img_url} />
-        <p>{article.body}</p>
-      </article>
-      <ArticleFooter>
-        <ArticleVote
-          votes={voteCount}
-          handleUpVote={handleUpVote}
-          handleDownVote={handleDownVote}
-        />
-        <div>{article.comment_count}</div>
-      </ArticleFooter>
-    </ArticleCard>
+    <>
+      <ArticleCard>
+        <ArticleHeader>
+          <div>
+            {article.author} {formatDate(article.created_at)}
+          </div>
+          <div>{article.topic}</div>
+        </ArticleHeader>
+        <article>
+          <h1>{article.title}</h1>
+          <img src={article.article_img_url} />
+          <p>{article.body}</p>
+        </article>
+        <ArticleFooter>
+          <ArticleVote
+            votes={voteCount}
+            handleUpVote={handleUpVote}
+            handleDownVote={handleDownVote}
+          />
+          <div>{article.comment_count}</div>
+        </ArticleFooter>
+      </ArticleCard>
+      <Button>Add Comment</Button>
+    </>
   );
 };
 

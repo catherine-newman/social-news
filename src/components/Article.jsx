@@ -1,7 +1,6 @@
 import FullArticle from "./FullArticle";
 import CommentList from "./CommentList";
 import styled from "styled-components";
-import Button from "./Button";
 
 const Container = styled.div`
   display: grid;
@@ -19,7 +18,6 @@ const Article = () => {
   return (
     <Container>
       <FullArticle />
-      <Button>Add Comment</Button>
       <CommentList />
     </Container>
   );
