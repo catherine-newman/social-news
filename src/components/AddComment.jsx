@@ -7,10 +7,20 @@ import { toast } from "react-toastify";
 
 const StyledForm = styled.form`
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, auto);
+  grid-template-areas:
+    "username character-limit"
+    "main main"
+    "submit-button submit-button";
   gap: 0.2em;
   justify-content: space-between;
+`;
+
+const CharacterLimit = styled.span`
+  justify-self: end;
+  grid-area: character-limit;
 `;
 
 const StyledTextArea = styled.textarea`
@@ -21,9 +31,15 @@ const StyledTextArea = styled.textarea`
   border-radius: 0.5em;
   margin-bottom: 0.5em;
   padding: 0.5em 1em;
+  grid-area: main;
+
+  &:focus {
+    outline: #4d5bb8 solid 3px;
+  }
 `;
 
 const StyledSubmitButton = styled(Button)`
+  grid-area: submit-button;
   &:disabled {
     cursor: not-allowed;
     background-color: #cacdf7;
@@ -85,6 +101,7 @@ const AddComment = ({ article_id, setCommentSubmit }) => {
   return (
     <StyledForm onSubmit={handleSubmit}>
       <label htmlFor="addcomment">Comment as {user}:</label>
+      <CharacterLimit>Max 500 characters</CharacterLimit>
       <StyledTextArea
         id="addcomment"
         name="comment"
