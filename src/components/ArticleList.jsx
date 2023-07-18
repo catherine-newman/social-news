@@ -44,7 +44,7 @@ const ArticleList = () => {
           );
         })}
         {isLoading ? (
-          "Loading..."
+          "Loading articles..."
         ) : articles.length < totalArticles ? (
           <Button onClick={fetchData}>Load more</Button>
         ) : (

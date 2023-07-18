@@ -5,6 +5,8 @@ import styled, { createGlobalStyle } from "styled-components";
 import Home from "./components/Home";
 import HeaderNav from "./components/HeaderNav";
 import Article from "./components/Article";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -24,6 +26,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
+      <ToastContainer position="top-center" hideProgressBar="true" />
       <HeaderNav />
       <StyledMain>
         <Routes>
