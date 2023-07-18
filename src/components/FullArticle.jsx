@@ -46,11 +46,13 @@ const FullArticle = () => {
     try {
       const res = await patchArticle(article_id, vote);
       setVoteCount(res.votes);
-      setDownVoteClicked(false);
     } catch (err) {
       toast.error("Oops! Something went wrong...");
       setVoteCount(voteCount);
       setUpVoteClicked(false);
+      if (vote === 2) {
+        setDownVoteClicked(true);
+      }
     }
   };
 
@@ -58,44 +60,54 @@ const FullArticle = () => {
     try {
       const res = await patchArticle(article_id, vote);
       setVoteCount(res.votes);
-      setUpVoteClicked(false);
     } catch (err) {
       toast.error("Oops! Something went wrong...");
       setVoteCount(voteCount);
       setDownVoteClicked(false);
+      if (vote === -2) {
+        setUpVoteClicked(true);
+      }
     }
   };
 
   const handleUpVote = () => {
     if (upVoteClicked) {
+      const newCount = voteCount - 1;
+      setVoteCount(newCount);
+      setUpVoteClicked(false);
       downVote(-1);
     } else {
       setUpVoteClicked(true);
-      if (downVoteClicked) {
-        const newCount = voteCount + 2;
-        setVoteCount(newCount);
-        upVote(2);
-      } else {
+      if (!downVoteClicked) {
         const newCount = voteCount + 1;
         setVoteCount(newCount);
         upVote(1);
+      } else {
+        const newCount = voteCount + 2;
+        setVoteCount(newCount);
+        setDownVoteClicked(false);
+        upVote(2);
       }
     }
   };
 
   const handleDownVote = () => {
     if (downVoteClicked) {
+      const newCount = voteCount + 1;
+      setVoteCount(newCount);
+      setDownVoteClicked(false);
       upVote(1);
     } else {
       setDownVoteClicked(true);
-      if (upVoteClicked) {
-        const newCount = voteCount - 2;
-        setVoteCount(newCount);
-        downVote(-2);
-      } else {
+      if (!upVoteClicked) {
         const newCount = voteCount - 1;
         setVoteCount(newCount);
         downVote(-1);
+      } else {
+        const newCount = voteCount - 2;
+        setVoteCount(newCount);
+        setUpVoteClicked(false);
+        downVote(-2);
       }
     }
   };
