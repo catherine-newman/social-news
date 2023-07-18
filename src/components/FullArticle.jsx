@@ -4,6 +4,7 @@ import { getArticle, patchArticle } from "../api";
 import { formatDate } from "../utilities/formatDate";
 import styled from "styled-components";
 import ArticleVote from "./ArticleVote";
+import { toast } from "react-toastify";
 
 const ArticleCard = styled.div`
   background-color: #ffffff;
@@ -42,9 +43,12 @@ const FullArticle = () => {
     const newCount = voteCount + 1;
     setVoteCount(newCount);
     (async () => {
-      const res = await patchArticle(article_id, 1);
-      setArticle(res);
-      setVoteCount(res.votes);
+      try {
+        const res = await patchArticle(article_id, 1);
+        setVoteCount(res.votes);
+      } catch (err) {
+        toast.error("Oops! Something went wrong...");
+      }
     })();
   };
 
@@ -52,9 +56,12 @@ const FullArticle = () => {
     const newCount = voteCount - 1;
     setVoteCount(newCount);
     (async () => {
-      const res = await patchArticle(article_id, -1);
-      setArticle(res);
-      setVoteCount(res.votes);
+      try {
+        const res = await patchArticle(article_id, -1);
+        setVoteCount(res.votes);
+      } catch (err) {
+        toast.error("Oops! Something went wrong...");
+      }
     })();
   };
 
