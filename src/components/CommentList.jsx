@@ -14,6 +14,10 @@ const StyledUL = styled.ul`
   justify-items: start;
 `;
 
+const StyledLi = styled.li`
+  width: 100%;
+`;
+
 const CommentList = ({ commentSubmit, setCommentSubmit }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
@@ -36,9 +40,9 @@ const CommentList = ({ commentSubmit, setCommentSubmit }) => {
     <StyledUL>
       {comments.map((comment) => {
         return (
-          <li key={comment.comment_id}>
+          <StyledLi key={comment.comment_id}>
             <Comment comment={comment} />
-          </li>
+          </StyledLi>
         );
       })}
     </StyledUL>
