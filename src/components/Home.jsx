@@ -1,12 +1,7 @@
 import ArticleList from "./ArticleList";
-import StyledMain from "./StyledMain";
 
 const Home = () => {
-  return (
-    <StyledMain>
-      <ArticleList />
-    </StyledMain>
-  );
+  return <ArticleList />;
 };
 
 export default Home;

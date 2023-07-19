@@ -29,6 +29,7 @@ const StyledForm = styled.form`
 
 const CharacterLimit = styled.span`
   justify-self: end;
+  align-self: end;
   grid-area: character-limit;
 `;
 
