@@ -10,6 +10,9 @@ const Card = styled.div`
     text-decoration: none;
     color: black;
   }
+  a:hover {
+    text-decoration: none;
+  }
 `;
 
 const TopicCard = ({ topic }) => {

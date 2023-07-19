@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { getArticles } from "../api";
 import ArticleCard from "./ArticleCard";
 import Button from "./Button";
+import { useParams } from "react-router-dom";
 
 const StyledUL = styled.ul`
   list-style-type: none;
@@ -23,10 +24,11 @@ const ArticleList = () => {
   const [page, setPage] = useState(1);
   const [totalArticles, setTotalArticles] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const { topic } = useParams();
 
   const fetchData = async () => {
     setIsLoading(true);
-    const res = await getArticles(page);
+    const res = await getArticles(topic, page);
     setArticles([...articles, ...res.articles]);
     setPage(page + 1);
     setTotalArticles(res.total_count);

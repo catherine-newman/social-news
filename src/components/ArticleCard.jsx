@@ -24,6 +24,9 @@ const CardBody = styled.div`
     color: black;
     text-decoration: none;
   }
+  a:hover {
+    text-decoration: none;
+  }
 `;
 
 const CardFooter = styled.div`
