@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useState } from "react";
+import { FaSortAmountDown, FaSortAmountUp } from "react-icons/fa";
 
 const StyledDiv = styled.div`
   display: grid;
@@ -13,17 +15,20 @@ const StyledDiv = styled.div`
 `;
 
 const StyledButton = styled.button`
-  background-color: #4d5bb8;
+  background-color: ${(props) => (props.$toggle ? "#27358a" : "#4d5bb8")};
   border: none;
   color: white;
   padding: 0.5em 1em 0.5em 1em;
   cursor: pointer;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: center;
 `;
 
 const StyledButtonDate = styled(StyledButton)`
   border-radius: 1em 0 0 1em;
   border-right: white solid 1px;
-  background-color: #27358a;
 `;
 
 const StyledButtonVotes = styled(StyledButton)`
@@ -31,14 +36,98 @@ const StyledButtonVotes = styled(StyledButton)`
   border-left: white solid 1px;
 `;
 
-const ArticleSort = () => {
+const ArticleSort = ({ setSortBy, setOrder, sortBy, order }) => {
+  const [dateToggle, setDateToggle] = useState(true);
+  const [commentsToggle, setCommentsToggle] = useState(false);
+  const [votesToggle, setVotesToggle] = useState(false);
+
+  const handleClickDate = () => {
+    if (sortBy === "created_at") {
+      if (order === "desc") setOrder("asc");
+      else setOrder("desc");
+    } else {
+      setDateToggle(true);
+      setCommentsToggle(false);
+      setVotesToggle(false);
+      setSortBy("created_at");
+      setOrder("desc");
+    }
+  };
+
+  const handleClickComments = () => {
+    if (sortBy === "comment_count") {
+      if (order === "desc") setOrder("asc");
+      else setOrder("desc");
+    } else {
+      setDateToggle(false);
+      setCommentsToggle(true);
+      setVotesToggle(false);
+      setSortBy("comment_count");
+      setOrder("desc");
+    }
+  };
+
+  const handleClickVotes = () => {
+    if (sortBy === "votes") {
+      if (order === "desc") setOrder("asc");
+      else setOrder("desc");
+    } else {
+      setDateToggle(false);
+      setCommentsToggle(false);
+      setVotesToggle(true);
+      setSortBy("votes");
+      setOrder("desc");
+    }
+  };
+
   return (
     <StyledDiv>
-      <StyledButtonDate>Date</StyledButtonDate>
-      <StyledButton>Comments</StyledButton>
-      <StyledButtonVotes>Votes</StyledButtonVotes>
+      <StyledButtonDate onClick={handleClickDate} $toggle={dateToggle}>
+        Date{" "}
+        {dateToggle ? (
+          order === "desc" ? (
+            <span>
+              <FaSortAmountDown />
+            </span>
+          ) : (
+            <FaSortAmountUp />
+          )
+        ) : (
+          ""
+        )}
+      </StyledButtonDate>
+      <StyledButton onClick={handleClickComments} $toggle={commentsToggle}>
+        Comments{" "}
+        {commentsToggle ? (
+          order === "desc" ? (
+            <span>
+              <FaSortAmountDown />
+            </span>
+          ) : (
+            <FaSortAmountUp />
+          )
+        ) : (
+          ""
+        )}
+      </StyledButton>
+      <StyledButtonVotes onClick={handleClickVotes} $toggle={votesToggle}>
+        Votes{" "}
+        {votesToggle ? (
+          order === "desc" ? (
+            <span>
+              <FaSortAmountDown />
+            </span>
+          ) : (
+            <FaSortAmountUp />
+          )
+        ) : (
+          ""
+        )}
+      </StyledButtonVotes>
     </StyledDiv>
   );
 };
 
 export default ArticleSort;
+
+//background-color: #27358a;

@@ -27,12 +27,21 @@ const ArticleList = () => {
   const [totalArticles, setTotalArticles] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const { topic } = useParams();
-  const [sortby, setSortBy] = useState("created_at");
+  const [sortBy, setSortBy] = useState("created_at");
   const [order, setOrder] = useState("desc");
 
   const fetchData = async () => {
     setIsLoading(true);
-    const res = await getArticles(topic, page, sortby, order);
+    const res = await getArticles(topic, 1, sortBy, order);
+    setArticles(res.articles);
+    setPage(1);
+    setTotalArticles(res.total_count);
+    setIsLoading(false);
+  };
+
+  const fetchMoreData = async () => {
+    setIsLoading(true);
+    const res = await getArticles(topic, page + 1, sortBy, order);
     setArticles([...articles, ...res.articles]);
     setPage(page + 1);
     setTotalArticles(res.total_count);
@@ -42,11 +51,16 @@ const ArticleList = () => {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sortBy, order]);
 
   return (
     <StyledMain>
-      <ArticleSort setSortBy={setSortBy} setOrder={setOrder} />
+      <ArticleSort
+        setSortBy={setSortBy}
+        setOrder={setOrder}
+        sortBy={sortBy}
+        order={order}
+      />
       <StyledUL>
         {articles.map((article) => {
           return (
@@ -58,7 +72,7 @@ const ArticleList = () => {
         {isLoading ? (
           "Loading articles..."
         ) : articles.length < totalArticles ? (
-          <Button onClick={fetchData}>Load more</Button>
+          <Button onClick={fetchMoreData}>Load more</Button>
         ) : (
           "No more articles"
         )}
