@@ -30,7 +30,8 @@ const CommentList = ({ commentSubmit, setCommentSubmit }) => {
       setIsLoading(false);
       setCommentSubmit(false);
     })();
-  }, [commentSubmit]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [article_id, commentSubmit]);
 
   if (isLoading) return <p>Loading comments...</p>;
 

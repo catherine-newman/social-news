@@ -9,7 +9,9 @@ import AddComment from "./AddComment";
 
 const ArticleCard = styled.div`
   background-color: #ffffff;
-
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
   img {
     border-radius: 1em;
   }
@@ -18,6 +20,16 @@ const ArticleCard = styled.div`
 const ArticleHeader = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const ArticleBody = styled.article`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  h1 {
+    text-align: center;
+  }
 `;
 
 const ArticleFooter = styled.div`
@@ -123,11 +135,11 @@ const FullArticle = ({ setCommentSubmit }) => {
           </div>
           <div>{article.topic}</div>
         </ArticleHeader>
-        <article>
+        <ArticleBody>
           <h1>{article.title}</h1>
           <img src={article.article_img_url} />
           <p>{article.body}</p>
-        </article>
+        </ArticleBody>
         <ArticleFooter>
           <ArticleVote
             votes={voteCount}
@@ -136,7 +148,7 @@ const FullArticle = ({ setCommentSubmit }) => {
             upVoteClicked={upVoteClicked}
             downVoteClicked={downVoteClicked}
           />
-          <div>{article.comment_count}</div>
+          <div>{article.comment_count} Comments</div>
         </ArticleFooter>
       </ArticleCard>
       <AddComment

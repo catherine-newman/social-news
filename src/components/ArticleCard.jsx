@@ -15,6 +15,10 @@ const Card = styled.div`
   img {
     border-radius: 1em;
   }
+
+  //   @media screen and (max-width: 640px) {
+  //     border-radius: 0em;
+  //   }
 `;
 
 const CardHeader = styled.div`
@@ -57,10 +61,9 @@ const ArticleCard = ({ article }) => {
         </div>
         <CardFooter>
           <VotesDiv>
-            <HiOutlineArrowsUpDown />
-            {article.votes}
+            <HiOutlineArrowsUpDown /> {article.votes}
           </VotesDiv>
-          <div>{article.comment_count}</div>
+          <div>{article.comment_count} Comments</div>
         </CardFooter>
       </Card>
     </IconContext.Provider>

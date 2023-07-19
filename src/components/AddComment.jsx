@@ -5,6 +5,13 @@ import styled from "styled-components";
 import { postComment } from "../api";
 import { toast } from "react-toastify";
 
+const StyledAddCommentDiv = styled.div`
+  border-bottom: 1px solid #4d5bb8;
+  text-align: center;
+  width: 100%;
+  padding: 0 0 1em 0;
+`;
+
 const StyledForm = styled.form`
   width: 100%;
   display: grid;
@@ -16,6 +23,8 @@ const StyledForm = styled.form`
     "submit-button submit-button";
   gap: 0.2em;
   justify-content: space-between;
+  padding: 0 0 1em 0;
+  border-bottom: 1px solid #cacdf7;
 `;
 
 const CharacterLimit = styled.span`
@@ -77,26 +86,29 @@ const AddComment = ({ article_id, setCommentSubmit }) => {
   };
 
   useEffect(() => {
+    const addComment = async (article_id, user, comment) => {
+      try {
+        await postComment(article_id, user, comment);
+        toast.success("Comment posted!");
+        setFormDisplay(false);
+        setSubmitDisabled(false);
+        setCommentSubmit(true);
+      } catch (err) {
+        toast.error("Oops! Something went wrong...");
+        setSubmitDisabled(false);
+      }
+    };
     if (comment) {
       addComment(article_id, user, comment);
     }
-  }, [comment]);
-
-  const addComment = async (article_id, user, comment) => {
-    try {
-      await postComment(article_id, user, comment);
-      toast.success("Comment posted!");
-      setFormDisplay(false);
-      setSubmitDisabled(false);
-      setCommentSubmit(true);
-    } catch (err) {
-      toast.error("Oops! Something went wrong...");
-      setSubmitDisabled(false);
-    }
-  };
+  }, [comment, article_id, user, setCommentSubmit]);
 
   if (!formDisplay)
-    return <Button onClick={handleButtonClick}>Add Comment</Button>;
+    return (
+      <StyledAddCommentDiv>
+        <Button onClick={handleButtonClick}>Add Comment</Button>
+      </StyledAddCommentDiv>
+    );
 
   return (
     <StyledForm onSubmit={handleSubmit}>

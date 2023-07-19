@@ -13,6 +13,10 @@ const Container = styled.div`
   background-color: #ffffff;
   margin-top: 2em;
   border-radius: 1em;
+
+  @media screen and (max-width: 640px) {
+    width: 95%;
+  }
 `;
 
 const Article = () => {
