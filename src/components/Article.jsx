@@ -10,10 +10,11 @@ const Container = styled.div`
   gap: 1em;
   justify-items: center;
   width: 640px;
-  padding: 2em;
+  padding: 2em 2em 0 2em;
   background-color: #ffffff;
   margin-top: 2em;
   border-radius: 1em;
+  margin-bottom: 2em;
 
   @media screen and (max-width: 640px) {
     width: 95%;

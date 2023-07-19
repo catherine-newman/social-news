@@ -6,6 +6,7 @@ import Button from "./Button";
 import { useParams } from "react-router-dom";
 import StyledMain from "./StyledMain";
 import ArticleSort from "./ArticleSort";
+import Loading from "./Loading";
 
 const StyledUL = styled.ul`
   list-style-type: none;
@@ -19,6 +20,10 @@ const StyledUL = styled.ul`
   @media screen and (max-width: 640px) {
     width: 95%;
   }
+`;
+
+const LoadMoreButton = styled(Button)`
+  margin-bottom: 2em;
 `;
 
 const ArticleList = () => {
@@ -70,11 +75,11 @@ const ArticleList = () => {
           );
         })}
         {isLoading ? (
-          "Loading articles..."
+          <Loading>Loading articles...</Loading>
         ) : articles.length < totalArticles ? (
-          <Button onClick={fetchMoreData}>Load more</Button>
+          <LoadMoreButton onClick={fetchMoreData}>Load more</LoadMoreButton>
         ) : (
-          "No more articles"
+          <Loading>No more articles</Loading>
         )}
       </StyledUL>
     </StyledMain>

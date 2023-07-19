@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getComments } from "../api";
 import Comment from "./Comment";
+import Loading from "./Loading";
 
 const StyledUL = styled.ul`
   list-style-type: none;
@@ -32,9 +33,9 @@ const CommentList = ({ commentSubmit, setCommentSubmit }) => {
     })();
   }, [article_id, commentSubmit, setCommentSubmit]);
 
-  if (isLoading) return <p>Loading comments...</p>;
+  if (isLoading) return <Loading>Loading comments...</Loading>;
 
-  if (comments.length === 0) return <p>No comments</p>;
+  if (comments.length === 0) return <Loading>No comments</Loading>;
 
   return (
     <StyledUL>
