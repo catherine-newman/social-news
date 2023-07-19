@@ -9,7 +9,7 @@ const StyledAddCommentDiv = styled.div`
   border-bottom: 1px solid #4d5bb8;
   text-align: center;
   width: 100%;
-  padding: 0 0 1em 0;
+  padding: 0 0 1.5em 0;
 `;
 
 const StyledForm = styled.form`
