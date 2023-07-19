@@ -2,23 +2,20 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { formatDate } from "../utilities/formatDate";
 import { HiOutlineArrowsUpDown } from "react-icons/hi2";
+import { FaRegCommentDots } from "react-icons/fa6";
 import { IconContext } from "react-icons";
 
 const Card = styled.div`
   background-color: #ffffff;
   border-radius: 1em;
-  padding: 2em;
-  a {
-    color: black;
-    text-decoration: none;
-  }
+  padding: 1em 1.5em;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em;
   img {
     border-radius: 1em;
+    margin-top: 0.5em;
   }
-
-  //   @media screen and (max-width: 640px) {
-  //     border-radius: 0em;
-  //   }
 `;
 
 const CardHeader = styled.div`
@@ -26,47 +23,59 @@ const CardHeader = styled.div`
   justify-content: space-between;
 `;
 
+const CardBody = styled.div`
+  text-align: center;
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+`;
+
 const CardFooter = styled.div`
   display: flex;
   justify-content: space-evenly;
 `;
 
-const VotesDiv = styled.div`
+const VotesCommentsDiv = styled.div`
   display: flex;
   gap: 0.5em;
   align-items: center;
-
-  svg {
-    cursor: pointer;
-  }
 `;
 
 const ArticleCard = ({ article }) => {
   return (
-    <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
-      <Card>
-        <CardHeader>
-          <div>
-            {article.author} {formatDate(article.created_at)}
-          </div>
-          <div>{article.topic}</div>
-        </CardHeader>
+    <Card>
+      <CardHeader>
         <div>
-          <Link to={`/${article.topic}/${article.article_id}`}>
-            <h2>{article.title}</h2>
-            <div>
-              <img src={article.article_img_url} />
-            </div>
-          </Link>
+          {article.author} {formatDate(article.created_at)}
         </div>
-        <CardFooter>
-          <VotesDiv>
+        <div>
+          <Link to={`/topics/${article.topic}`}>{article.topic}</Link>
+        </div>
+      </CardHeader>
+      <CardBody>
+        <Link to={`/${article.topic}/${article.article_id}`}>
+          <h2>{article.title}</h2>
+          <div>
+            <img src={article.article_img_url} />
+          </div>
+        </Link>
+      </CardBody>
+      <CardFooter>
+        <VotesCommentsDiv>
+          <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
             <HiOutlineArrowsUpDown /> {article.votes}
-          </VotesDiv>
-          <div>{article.comment_count} Comments</div>
-        </CardFooter>
-      </Card>
-    </IconContext.Provider>
+          </IconContext.Provider>
+        </VotesCommentsDiv>
+        <VotesCommentsDiv>
+          <FaRegCommentDots />
+          {article.comment_count} Comments
+        </VotesCommentsDiv>
+      </CardFooter>
+    </Card>
   );
 };
 

@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getArticle, patchArticle } from "../api";
 import { formatDate } from "../utilities/formatDate";
 import styled from "styled-components";
 import ArticleVote from "./ArticleVote";
 import { toast } from "react-toastify";
 import AddComment from "./AddComment";
+import { FaRegCommentDots } from "react-icons/fa6";
 
 const ArticleCard = styled.div`
   background-color: #ffffff;
@@ -35,6 +36,12 @@ const ArticleBody = styled.article`
 const ArticleFooter = styled.div`
   display: flex;
   justify-content: space-evenly;
+`;
+
+const CommentCountDiv = styled.div`
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
 `;
 
 const FullArticle = ({ setCommentSubmit }) => {
@@ -133,7 +140,9 @@ const FullArticle = ({ setCommentSubmit }) => {
           <div>
             {article.author} {formatDate(article.created_at)}
           </div>
-          <div>{article.topic}</div>
+          <div>
+            <Link to={`/topics/${article.topic}`}>{article.topic}</Link>
+          </div>
         </ArticleHeader>
         <ArticleBody>
           <h1>{article.title}</h1>
@@ -148,7 +157,9 @@ const FullArticle = ({ setCommentSubmit }) => {
             upVoteClicked={upVoteClicked}
             downVoteClicked={downVoteClicked}
           />
-          <div>{article.comment_count} Comments</div>
+          <CommentCountDiv>
+            <FaRegCommentDots /> {article.comment_count} Comments
+          </CommentCountDiv>
         </ArticleFooter>
       </ArticleCard>
       <AddComment
