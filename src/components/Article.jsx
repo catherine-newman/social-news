@@ -2,6 +2,7 @@ import FullArticle from "./FullArticle";
 import CommentList from "./CommentList";
 import styled from "styled-components";
 import { useState } from "react";
+import StyledMain from "./StyledMain";
 
 const Container = styled.div`
   display: grid;
@@ -22,13 +23,15 @@ const Container = styled.div`
 const Article = () => {
   const [commentSubmit, setCommentSubmit] = useState(false);
   return (
-    <Container>
-      <FullArticle setCommentSubmit={setCommentSubmit} />
-      <CommentList
-        commentSubmit={commentSubmit}
-        setCommentSubmit={setCommentSubmit}
-      />
-    </Container>
+    <StyledMain>
+      <Container>
+        <FullArticle setCommentSubmit={setCommentSubmit} />
+        <CommentList
+          commentSubmit={commentSubmit}
+          setCommentSubmit={setCommentSubmit}
+        />
+      </Container>
+    </StyledMain>
   );
 };
 

@@ -4,6 +4,7 @@ import { getArticles } from "../api";
 import ArticleCard from "./ArticleCard";
 import Button from "./Button";
 import { useParams } from "react-router-dom";
+import StyledMain from "./StyledMain";
 
 const StyledUL = styled.ul`
   list-style-type: none;
@@ -41,7 +42,7 @@ const ArticleList = () => {
   }, []);
 
   return (
-    <>
+    <StyledMain>
       <StyledUL>
         {articles.map((article) => {
           return (
@@ -58,7 +59,7 @@ const ArticleList = () => {
           "No more articles"
         )}
       </StyledUL>
-    </>
+    </StyledMain>
   );
 };
 

@@ -1,7 +1,7 @@
 import "./App.css";
 import "./reset.css";
-import { Routes, Route } from "react-router-dom";
-import styled, { createGlobalStyle } from "styled-components";
+import { Routes, Route, Outlet } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
 import Home from "./components/Home";
 import HeaderNav from "./components/HeaderNav";
 import Article from "./components/Article";
@@ -27,28 +27,26 @@ a:hover {
 }
 `;
 
-const StyledMain = styled.main`
-  display: flex;
-  max-width: 100%;
-  flex-direction: row;
-  justify-content: center;
-  margin: 0 auto;
-`;
-
 function App() {
   return (
     <>
       <GlobalStyle />
       <ToastContainer position="top-center" hideProgressBar="true" />
-      <HeaderNav />
-      <StyledMain>
-        <Routes>
+      <Routes>
+        <Route
+          element={
+            <>
+              <HeaderNav />
+              <Outlet />
+            </>
+          }
+        >
           <Route path="/" element={<Home />} />
           <Route path="/:topic/:article_id" element={<Article />} />
           <Route path="/topics" element={<TopicList />} />
           <Route path="/:topic" element={<ArticleList />} />
-        </Routes>
-      </StyledMain>
+        </Route>
+      </Routes>
     </>
   );
 }

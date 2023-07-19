@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { getTopics } from "../api";
 import TopicCard from "./TopicCard";
+import StyledMain from "./StyledMain";
 
 const StyledUL = styled.ul`
   list-style-type: none;
@@ -33,15 +34,17 @@ const TopicList = () => {
   if (isLoading) return <p>Loading topics...</p>;
 
   return (
-    <StyledUL>
-      {topics.map((topic) => {
-        return (
-          <li key={topic.slug}>
-            <TopicCard topic={topic} />
-          </li>
-        );
-      })}
-    </StyledUL>
+    <StyledMain>
+      <StyledUL>
+        {topics.map((topic) => {
+          return (
+            <li key={topic.slug}>
+              <TopicCard topic={topic} />
+            </li>
+          );
+        })}
+      </StyledUL>
+    </StyledMain>
   );
 };
 
