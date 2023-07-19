@@ -7,8 +7,8 @@ const Card = styled.div`
   text-align: center;
   padding: 2em;
   a {
-    color: black;
     text-decoration: none;
+    color: black;
   }
 `;
 

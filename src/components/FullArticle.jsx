@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getArticle, patchArticle } from "../api";
 import { formatDate } from "../utilities/formatDate";
 import styled from "styled-components";
@@ -133,7 +133,9 @@ const FullArticle = ({ setCommentSubmit }) => {
           <div>
             {article.author} {formatDate(article.created_at)}
           </div>
-          <div>{article.topic}</div>
+          <div>
+            <Link to={`/${article.topic}`}>{article.topic}</Link>
+          </div>
         </ArticleHeader>
         <ArticleBody>
           <h1>{article.title}</h1>

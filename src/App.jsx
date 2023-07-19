@@ -13,7 +13,18 @@ const GlobalStyle = createGlobalStyle`
 body {
     font-family: "Jost", sans-serif;
     background-color: #cacdf7;
-}`;
+}
+
+a {
+    text-decoration: none;
+    color: #4d5bb8;
+    font-weight: 700;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+`;
 
 const StyledMain = styled.main`
   display: flex;
