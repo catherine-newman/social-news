@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { formatDate } from "../utilities/formatDate";
 import { HiOutlineArrowsUpDown } from "react-icons/hi2";
+import { FaRegCommentDots } from "react-icons/fa6";
 import { IconContext } from "react-icons";
 
 const Card = styled.div`
@@ -34,44 +35,43 @@ const CardFooter = styled.div`
   justify-content: space-evenly;
 `;
 
-const VotesDiv = styled.div`
+const VotesCommentsDiv = styled.div`
   display: flex;
   gap: 0.5em;
   align-items: center;
-
-  svg {
-    cursor: pointer;
-  }
 `;
 
 const ArticleCard = ({ article }) => {
   return (
-    <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
-      <Card>
-        <CardHeader>
+    <Card>
+      <CardHeader>
+        <div>
+          {article.author} {formatDate(article.created_at)}
+        </div>
+        <div>
+          <Link to={`/${article.topic}`}>{article.topic}</Link>
+        </div>
+      </CardHeader>
+      <CardBody>
+        <Link to={`/${article.topic}/${article.article_id}`}>
+          <h2>{article.title}</h2>
           <div>
-            {article.author} {formatDate(article.created_at)}
+            <img src={article.article_img_url} />
           </div>
-          <div>
-            <Link to={`/${article.topic}`}>{article.topic}</Link>
-          </div>
-        </CardHeader>
-        <CardBody>
-          <Link to={`/${article.topic}/${article.article_id}`}>
-            <h2>{article.title}</h2>
-            <div>
-              <img src={article.article_img_url} />
-            </div>
-          </Link>
-        </CardBody>
-        <CardFooter>
-          <VotesDiv>
+        </Link>
+      </CardBody>
+      <CardFooter>
+        <VotesCommentsDiv>
+          <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
             <HiOutlineArrowsUpDown /> {article.votes}
-          </VotesDiv>
-          <div>{article.comment_count} Comments</div>
-        </CardFooter>
-      </Card>
-    </IconContext.Provider>
+          </IconContext.Provider>
+        </VotesCommentsDiv>
+        <VotesCommentsDiv>
+          <FaRegCommentDots />
+          {article.comment_count} Comments
+        </VotesCommentsDiv>
+      </CardFooter>
+    </Card>
   );
 };
 
