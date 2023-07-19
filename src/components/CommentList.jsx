@@ -14,18 +14,24 @@ const StyledUL = styled.ul`
   justify-items: start;
 `;
 
-const CommentList = () => {
-  const [comments, setComments] = useState([]);
+const StyledLi = styled.li`
+  width: 100%;
+`;
+
+const CommentList = ({ commentSubmit, setCommentSubmit }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     (async () => {
       const res = await getComments(article_id);
       setComments(res);
       setIsLoading(false);
+      setCommentSubmit(false);
     })();
-  }, [article_id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [article_id, commentSubmit]);
 
   if (isLoading) return <p>Loading comments...</p>;
 
@@ -35,9 +41,9 @@ const CommentList = () => {
     <StyledUL>
       {comments.map((comment) => {
         return (
-          <li key={comment.comment_id}>
+          <StyledLi key={comment.comment_id}>
             <Comment comment={comment} />
-          </li>
+          </StyledLi>
         );
       })}
     </StyledUL>

@@ -12,6 +12,10 @@ const StyledUL = styled.ul`
   width: 640px;
   padding: 0;
   margin-top: 2em;
+
+  @media screen and (max-width: 640px) {
+    width: 95%;
+  }
 `;
 
 const ArticleList = () => {
@@ -31,6 +35,7 @@ const ArticleList = () => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
