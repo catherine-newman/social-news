@@ -141,7 +141,7 @@ const FullArticle = ({ setCommentSubmit }) => {
             {article.author} {formatDate(article.created_at)}
           </div>
           <div>
-            <Link to={`/${article.topic}`}>{article.topic}</Link>
+            <Link to={`/topics/${article.topic}`}>{article.topic}</Link>
           </div>
         </ArticleHeader>
         <ArticleBody>

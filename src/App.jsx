@@ -44,7 +44,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/:topic/:article_id" element={<Article />} />
           <Route path="/topics" element={<TopicList />} />
-          <Route path="/:topic" element={<ArticleList />} />
+          <Route path="/topics/:topic" element={<ArticleList />} />
         </Route>
       </Routes>
     </>

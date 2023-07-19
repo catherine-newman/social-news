@@ -8,17 +8,13 @@ import { IconContext } from "react-icons";
 const Card = styled.div`
   background-color: #ffffff;
   border-radius: 1em;
-  padding: 1em 2em;
+  padding: 1em 1.5em;
   display: grid;
   grid-template-columns: 1fr;
   gap: 1em;
   img {
     border-radius: 1em;
     margin-top: 0.5em;
-  }
-
-  @media screen and (max-width: 640px) {
-    padding: 1em;
   }
 `;
 
@@ -57,7 +53,7 @@ const ArticleCard = ({ article }) => {
           {article.author} {formatDate(article.created_at)}
         </div>
         <div>
-          <Link to={`/${article.topic}`}>{article.topic}</Link>
+          <Link to={`/topics/${article.topic}`}>{article.topic}</Link>
         </div>
       </CardHeader>
       <CardBody>

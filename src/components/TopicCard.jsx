@@ -18,7 +18,7 @@ const Card = styled.div`
 const TopicCard = ({ topic }) => {
   return (
     <Card>
-      <Link to={`/${topic.slug}`}>
+      <Link to={`/topics/${topic.slug}`}>
         <h2>{topic.slug}</h2>
         <div>{topic.description}</div>
       </Link>
