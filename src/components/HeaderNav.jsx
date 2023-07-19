@@ -10,7 +10,7 @@ const StyledHeader = styled.header`
 const HeaderNav = () => {
   return (
     <StyledHeader>
-      <Link to="/">Home</Link>
+      <Link to="/">Home</Link> <Link to="/topics">Topics</Link>
     </StyledHeader>
   );
 };

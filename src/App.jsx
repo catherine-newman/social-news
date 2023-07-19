@@ -7,6 +7,7 @@ import HeaderNav from "./components/HeaderNav";
 import Article from "./components/Article";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import TopicList from "./components/TopicList";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -32,6 +33,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:topic/:article_id" element={<Article />} />
+          <Route path="/topics" element={<TopicList />} />
         </Routes>
       </StyledMain>
     </>

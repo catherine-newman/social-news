@@ -33,3 +33,8 @@ export const postComment = async (article_id, username, comment) => {
   });
   return res.data.comment;
 };
+
+export const getTopics = async () => {
+  const res = await newsApi.get(`/topics`);
+  return res.data.topics;
+};
