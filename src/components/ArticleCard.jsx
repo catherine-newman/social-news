@@ -8,9 +8,17 @@ import { IconContext } from "react-icons";
 const Card = styled.div`
   background-color: #ffffff;
   border-radius: 1em;
-  padding: 2em;
+  padding: 1em 2em;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em;
   img {
     border-radius: 1em;
+    margin-top: 0.5em;
+  }
+
+  @media screen and (max-width: 640px) {
+    padding: 1em;
   }
 `;
 
