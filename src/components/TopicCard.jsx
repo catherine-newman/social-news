@@ -6,23 +6,28 @@ const Card = styled.div`
   border-radius: 1em;
   text-align: center;
   padding: 2em;
-  a {
-    text-decoration: none;
-    color: black;
+  will-change: transform;
+  transition: transform 0.1s ease-in-out;
+
+  &:hover {
+    transform: scale(1.005);
+    box-shadow: 0 10px 5px -5px #a8aace;
   }
-  a:hover {
-    text-decoration: none;
-  }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;
 
 const TopicCard = ({ topic }) => {
   return (
-    <Card>
-      <Link to={`/topics/${topic.slug}`}>
+    <StyledLink to={`/topics/${topic.slug}`}>
+      <Card>
         <h2>{topic.slug}</h2>
         <div>{topic.description}</div>
-      </Link>
-    </Card>
+      </Card>
+    </StyledLink>
   );
 };
 

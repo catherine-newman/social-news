@@ -4,10 +4,12 @@ const newsApi = axios.create({
   baseURL: "https://news-api-qn5t.onrender.com/api",
 });
 
-export const getArticles = async (topic, page) => {
+export const getArticles = async (topic, page, sortby, order) => {
   const params = {
     p: page,
     total_count: true,
+    sort_by: sortby,
+    order: order,
   };
   if (topic) {
     params.topic = topic;

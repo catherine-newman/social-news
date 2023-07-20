@@ -23,7 +23,7 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
+    border-bottom: #4d5bb8 solid 1px;
 }
 `;
 

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { getTopics } from "../api";
 import TopicCard from "./TopicCard";
 import StyledMain from "./StyledMain";
+import Loading from "./Loading";
 
 const StyledUL = styled.ul`
   list-style-type: none;
@@ -31,7 +32,7 @@ const TopicList = () => {
     })();
   }, []);
 
-  if (isLoading) return <p>Loading topics...</p>;
+  if (isLoading) return <Loading>Loading topics...</Loading>;
 
   return (
     <StyledMain>

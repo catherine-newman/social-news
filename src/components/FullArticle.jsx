@@ -6,7 +6,6 @@ import styled from "styled-components";
 import ArticleVote from "./ArticleVote";
 import { toast } from "react-toastify";
 import AddComment from "./AddComment";
-import { FaRegCommentDots } from "react-icons/fa6";
 
 const ArticleCard = styled.div`
   background-color: #ffffff;
@@ -36,12 +35,6 @@ const ArticleBody = styled.article`
 const ArticleFooter = styled.div`
   display: flex;
   justify-content: space-evenly;
-`;
-
-const CommentCountDiv = styled.div`
-  display: flex;
-  gap: 0.5em;
-  align-items: center;
 `;
 
 const FullArticle = ({ setCommentSubmit }) => {
@@ -157,9 +150,6 @@ const FullArticle = ({ setCommentSubmit }) => {
             upVoteClicked={upVoteClicked}
             downVoteClicked={downVoteClicked}
           />
-          <CommentCountDiv>
-            <FaRegCommentDots /> {article.comment_count} Comments
-          </CommentCountDiv>
         </ArticleFooter>
       </ArticleCard>
       <AddComment
