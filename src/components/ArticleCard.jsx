@@ -59,9 +59,7 @@ const ArticleCard = ({ article }) => {
           <div>
             {article.author} {formatDate(article.created_at)}
           </div>
-          <div>
-            <Link to={`/topics/${article.topic}`}>{article.topic}</Link>
-          </div>
+          <div>{article.topic}</div>
         </CardHeader>
         <CardBody>
           <h2>{article.title}</h2>
