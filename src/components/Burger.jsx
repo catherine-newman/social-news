@@ -21,9 +21,9 @@ const StyledBurger = styled.button`
   div {
     width: 2rem;
     height: 0.25rem;
-    background: #000000;
+    background: ${({ theme }) => theme.cardborder};
     border-radius: 10px;
-    transition: all 0.3s linear;
+    transition: all 0.1s linear;
     position: relative;
     transform-origin: 1px;
 
@@ -33,7 +33,6 @@ const StyledBurger = styled.button`
 
     &:nth-child(2) {
       opacity: ${({ open }) => (open ? "0" : "1")};
-      transform: ${({ open }) => (open ? "translateX(20px)" : "translateX(0)")};
     }
 
     &:nth-child(3) {

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const StyledDiv = styled.div`
-  border-bottom: 1px solid #4d5bb8;
+  border-bottom: 1px solid ${({ theme }) => theme.cardborder};
   text-align: center;
   width: 100%;
   padding: 0 0 1.5rem 0;
@@ -30,7 +30,7 @@ const StyledForm = styled.form`
   gap: 0.2em;
   justify-content: space-between;
   padding: 0 0 1rem 0;
-  border-bottom: 1px solid #cacdf7;
+  border-bottom: 1px solid ${({ theme }) => theme.cardborder};
 `;
 
 const CharacterLimit = styled.span`
@@ -43,14 +43,15 @@ const StyledTextArea = styled.textarea`
   width: 100%;
   height: 7em;
   resize: none;
-  border: #4d5bb8 solid 1px;
+  border: ${({ theme }) => theme.mainbuttoncolor} solid 1px;
+  background-color: ${({ theme }) => theme.cardbackground};
   border-radius: 0.5em;
   margin-bottom: 0.5em;
   padding: 0.5rem 1em;
   grid-area: main;
 
   &:focus {
-    outline: #4d5bb8 solid 3px;
+    outline: ${({ theme }) => theme.mainbuttoncolor} solid 3px;
   }
 `;
 
@@ -58,7 +59,7 @@ const StyledSubmitButton = styled(Button)`
   grid-area: submit-button;
   &:disabled {
     cursor: not-allowed;
-    background-color: #cacdf7;
+    background-color: ${({ theme }) => theme.mainbuttoncolordisabled};
   }
 `;
 

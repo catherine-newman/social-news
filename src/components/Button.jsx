@@ -1,19 +1,15 @@
 import styled from "styled-components";
 
 const Button = styled.button`
-  background-color: #4d5bb8;
+  background-color: ${({ theme }) => theme.mainbuttoncolor};
   border: none;
-  color: white;
+  color: #000;
   border-radius: 1em;
   padding: 0.5rem 2rem;
   margin: auto;
   cursor: pointer;
-  will-change: transform;
-  transition: transform 0.1s ease-in-out;
-
-  &:hover {
-    background-color: #3e4a9b;
-  }
+  text-transform: uppercase;
+  font-weight: bold;
 `;
 
 export default Button;

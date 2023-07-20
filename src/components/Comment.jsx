@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Loading from "./Loading";
 
 const CommentCard = styled.div`
-  border: solid 1px #cacdf7;
+  border: solid 1px ${({ theme }) => theme.cardborder};
   border-radius: 1em;
   padding: 1em;
   display: flex;
@@ -37,6 +37,7 @@ const StyledButton = styled.button`
 `;
 
 const StyledRiDeleteBin6Line = styled(RiDeleteBin6Line)`
+  color: ${({ theme }) => theme.text};
   will-change: transform;
   transition:
     transform 350ms ease,

@@ -5,15 +5,15 @@ const StyledMenu = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #ffffff;
+  background: ${({ theme }) => theme.background};
   height: auto;
+  color: ${({ theme }) => theme.text};
   text-align: left;
   padding: 0 2rem 2rem 2em;
   position: absolute;
   top: 5em;
   left: 0;
   z-index: 9;
-  transition: transform 0.3s ease-in-out;
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
 
   @media (max-width: 200px) {
@@ -25,7 +25,7 @@ const StyledMenu = styled.nav`
     text-transform: uppercase;
     padding: 1rem 0;
     font-weight: bold;
-    color: black;
+    color: ${({ theme }) => theme.text};
     text-decoration: none;
 
     @media (max-width: 200px) {

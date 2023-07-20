@@ -16,9 +16,11 @@ const StyledDiv = styled.div`
 `;
 
 const StyledButton = styled.button`
-  background-color: ${(props) => (props.$toggle ? "#27358a" : "#4d5bb8")};
+  background-color: ${(props) => (props.$toggle ? "#F36F58" : "#f4826d")};
   border: none;
-  color: white;
+  color: #000;
+  font-weight: bold;
+  text-transform: uppercase;
   padding: 0.5rem 1rem 0.5rem 1em;
   cursor: pointer;
   display: flex;
@@ -29,12 +31,12 @@ const StyledButton = styled.button`
 
 const StyledButtonDate = styled(StyledButton)`
   border-radius: 1rem 0 0 1em;
-  border-right: white solid 1px;
+  border-right: ${({ theme }) => theme.cardbackground} solid 1px;
 `;
 
 const StyledButtonVotes = styled(StyledButton)`
   border-radius: 0 1rem 1rem 0;
-  border-left: white solid 1px;
+  border-left: ${({ theme }) => theme.cardbackground} solid 1px;
 `;
 
 const SortingIcon = ({ toggle, order }) => {

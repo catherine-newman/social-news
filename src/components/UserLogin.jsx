@@ -12,7 +12,7 @@ const Container = styled.div`
   justify-items: center;
   width: 640px;
   padding: 2em;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.cardbackground};
   margin-top: 2em;
   border-radius: 1em;
   margin-bottom: 2em;
@@ -32,9 +32,10 @@ const StyledUL = styled.ul`
 `;
 
 const StyledButton = styled(Button)`
+  text-transform: none;
   &:disabled {
     cursor: not-allowed;
-    background-color: #cacdf7;
+    background-color: ${({ theme }) => theme.mainbuttoncolordisabled};
   }
 `;
 

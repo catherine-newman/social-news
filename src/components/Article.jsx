@@ -11,11 +11,10 @@ const Container = styled.div`
   grid-template-columns: 1fr;
   gap: 1em;
   justify-items: center;
-  width: 640px;
+  max-width: 920px;
+  width: 100%;
   padding: 2rem 2rem 0 2em;
-  background-color: #ffffff;
   margin-top: 2em;
-  border-radius: 1em;
   margin-bottom: 2em;
 
   @media screen and (max-width: 640px) {

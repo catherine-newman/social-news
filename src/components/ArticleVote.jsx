@@ -12,7 +12,12 @@ const StyledDiv = styled.div`
 
 const StyledArrowIcon = styled.div`
   cursor: pointer;
-  color: ${(props) => (props.$clicked ? "#7a82e4" : "black")};
+  color: ${(props) =>
+    props.$clicked && props.$up
+      ? "#90e079"
+      : props.$clicked && !props.up
+      ? "#f4826d"
+      : ({ theme }) => theme.text};
   will-change: transform;
   transition:
     transform 350ms ease,
@@ -20,7 +25,7 @@ const StyledArrowIcon = styled.div`
 
   &:hover {
     transform: scale(1.3) translateY(${(props) => (props.$up ? "-5px" : "5px")});
-    color: #7a82e4;
+    color: ${(props) => (props.$up ? "#90e079" : "#f4826d")};
     transition:
       transform 150ms ease,
       color 150ms ease;

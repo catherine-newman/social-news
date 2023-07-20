@@ -1,6 +1,9 @@
 import "./styles/reset.css";
 import "react-toastify/dist/ReactToastify.min.css";
 import GlobalStyle from "./styles/GlobalStyle";
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "./styles/Themes";
+import { useDarkMode } from "./components/ThemeToggler";
 
 import { Routes, Route, Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -16,15 +19,21 @@ import {
 } from "./components";
 
 function App() {
+  const [theme, themeToggler, themeReady] = useDarkMode();
+
+  const themeMode = theme === "light" ? lightTheme : darkTheme;
+
+  if (!themeReady) return <div />;
+
   return (
-    <>
+    <ThemeProvider theme={themeMode}>
       <GlobalStyle />
       <ToastContainer position="top-center" hideProgressBar="true" />
       <Routes>
         <Route
           element={
             <>
-              <HeaderNav />
+              <HeaderNav theme={theme} toggleTheme={themeToggler} />
               <Outlet />
             </>
           }
@@ -37,7 +46,7 @@ function App() {
           <Route path="*" element={<ErrorPage status={404} />} />
         </Route>
       </Routes>
-    </>
+    </ThemeProvider>
   );
 }
 

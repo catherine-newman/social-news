@@ -6,49 +6,69 @@ import { FaRegCommentDots } from "react-icons/fa6";
 import { IconContext } from "react-icons";
 
 const Card = styled.div`
-  background-color: #ffffff;
-  border-radius: 1em;
-  padding: 1rem 1.5em;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1em;
   will-change: transform;
-  transition: box-shadow 450ms ease;
+  transition: opacity 450ms ease;
 
   &:hover {
-    transition: box-shadow 125ms;
-    box-shadow: 0 10px 5px -5px #a8aace;
+    opacity: 0.8;
+    transition: opacity 125ms;
   }
   img {
-    border-radius: 1em;
-    margin-top: 0.5em;
+    border-radius: 1.5em;
   }
+`;
+
+const CardDetails = styled.div`
+  max-width: 70%;
+  z-index: 1;
+  max-height: 9rem;
+  height: 100%;
+  width: 100%;
+  max-width: 30rem;
+  background: ${({ theme }) => theme.cardbackground};
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 0.3rem 0.3rem 2.8rem 0.3rem;
+  display: flex;
+  flex-direction: column;
+  border-bottom: ${({ theme }) => theme.cardborder} solid 1px;
 `;
 
 const CardHeader = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  padding: 0.7rem 0 0 1rem;
+  h2 {
+    font-size: 1.2rem;
+  }
 `;
 
-const CardBody = styled.div`
-  text-align: center;
+const CardFooter = styled.div`
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  gap: 1rem;
 `;
 
 const StyledLink = styled(Link)`
-  color: black;
+  color: ${({ theme }) => theme.text};
   text-decoration: none;
   font-weight: normal;
 `;
 
-const CardFooter = styled.div`
-  display: flex;
-  justify-content: space-evenly;
+const ImageContainer = styled.div`
+  padding-bottom: 2em;
 `;
 
 const VotesCommentsDiv = styled.div`
   display: flex;
   gap: 0.5em;
   align-items: center;
+  border-right: ${({ theme }) => theme.cardborder} solid 1px;
+  padding-right: 1rem;
 `;
 
 const ArticleCard = ({ article }) => {
@@ -66,29 +86,27 @@ const ArticleCard = ({ article }) => {
   return (
     <StyledLink to={`/${topic}/${article_id}`}>
       <Card>
-        <CardHeader>
-          <div>
-            {author} {formatDate(created_at)}
-          </div>
-          <div>{topic}</div>
-        </CardHeader>
-        <CardBody>
-          <h2>{title}</h2>
-          <div>
-            <img src={article_img_url} />
-          </div>
-        </CardBody>
-        <CardFooter>
-          <VotesCommentsDiv>
-            <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
-              <HiOutlineArrowsUpDown /> {votes}
-            </IconContext.Provider>
-          </VotesCommentsDiv>
-          <VotesCommentsDiv>
-            <FaRegCommentDots />
-            {comment_count} Comments
-          </VotesCommentsDiv>
-        </CardFooter>
+        <ImageContainer>
+          <img src={article_img_url} />
+        </ImageContainer>
+        <CardDetails>
+          <CardHeader>
+            <h2>{title}</h2>
+            <p>by {author}</p>
+          </CardHeader>
+          <CardFooter>
+            <VotesCommentsDiv>
+              <FaRegCommentDots />
+              {comment_count} Comments
+            </VotesCommentsDiv>
+            <VotesCommentsDiv>
+              <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
+                <HiOutlineArrowsUpDown /> {votes} votes
+              </IconContext.Provider>
+            </VotesCommentsDiv>
+            <div>{formatDate(created_at)}</div>
+          </CardFooter>
+        </CardDetails>
       </Card>
     </StyledLink>
   );

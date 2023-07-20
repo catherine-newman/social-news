@@ -9,27 +9,30 @@ import AddComment from "./AddComment";
 import Loading from "./Loading";
 
 const ArticleCard = styled.div`
-  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   gap: 1em;
-  img {
-    border-radius: 1em;
-  }
 `;
 
 const ArticleHeader = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  padding: 1rem 2rem;
 `;
 
-const ArticleBody = styled.article`
+const ArticleDetails = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 1em;
-
-  h1 {
-    text-align: center;
+  justify-content: space-between;
+  padding: 2rem 0;
+  align-items: center;
+  border-bottom: ${({ theme }) => theme.cardborder} solid 2px;
+  margin-bottom: 2rem;
+  a {
+    background: ${({ theme }) => theme.accent};
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 1rem;
+    color: ${({ theme }) => theme.text};
   }
 `;
 
@@ -46,7 +49,7 @@ const FullArticle = ({ setCommentSubmit, article_id, setError }) => {
   const [downVoteClicked, setDownVoteClicked] = useState(false);
 
   useEffect(() => {
-    (async () => {
+    const fetchArticle = async () => {
       try {
         const res = await getArticle(article_id);
         setArticle(res);
@@ -55,8 +58,9 @@ const FullArticle = ({ setCommentSubmit, article_id, setError }) => {
       } catch (err) {
         setError(err);
       }
-    })();
-  }, [article_id]);
+    };
+    fetchArticle();
+  }, [article_id, setError]);
 
   const upVote = async (vote) => {
     try {
@@ -133,19 +137,16 @@ const FullArticle = ({ setCommentSubmit, article_id, setError }) => {
   return (
     <>
       <ArticleCard>
+        <img src={article.article_img_url} />
         <ArticleHeader>
-          <div>
-            {article.author} {formatDate(article.created_at)}
-          </div>
-          <div>
-            <Link to={`/topics/${article.topic}`}>{article.topic}</Link>
-          </div>
-        </ArticleHeader>
-        <ArticleBody>
+          {formatDate(article.created_at)}
           <h1>{article.title}</h1>
-          <img src={article.article_img_url} />
+          <ArticleDetails>
+            by {article.author}
+            <Link to={`/topics/${article.topic}`}># {article.topic}</Link>
+          </ArticleDetails>
           <p>{article.body}</p>
-        </ArticleBody>
+        </ArticleHeader>
         <ArticleFooter>
           <ArticleVote
             votes={voteCount}
