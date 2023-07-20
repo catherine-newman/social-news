@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import TopicList from "./components/TopicList";
 import ArticleList from "./components/ArticleList";
+import UserLogin from "./components/UserLogin";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -45,6 +46,7 @@ function App() {
           <Route path="/:topic/:article_id" element={<Article />} />
           <Route path="/topics" element={<TopicList />} />
           <Route path="/topics/:topic" element={<ArticleList />} />
+          <Route path="/users" element={<UserLogin />} />
         </Route>
       </Routes>
     </>
