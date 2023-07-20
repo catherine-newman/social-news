@@ -19,12 +19,6 @@ const StyledUL = styled.ul`
 
 const StyledLi = styled.li`
   width: 100%;
-  padding: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  border: solid 1px #cacdf7;
-  border-radius: 1em;
 `;
 
 const CommentCountDiv = styled.div`
@@ -39,6 +33,7 @@ const CommentList = ({ commentSubmit, setCommentSubmit }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
   const [comments, setComments] = useState([]);
+  const [commentDeleted, setCommentDeleted] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -46,8 +41,9 @@ const CommentList = ({ commentSubmit, setCommentSubmit }) => {
       setComments(res);
       setIsLoading(false);
       setCommentSubmit(false);
+      setCommentDeleted(false);
     })();
-  }, [article_id, commentSubmit, setCommentSubmit]);
+  }, [article_id, commentSubmit, setCommentSubmit, commentDeleted]);
 
   if (isLoading) return <Loading>Loading comments...</Loading>;
 
@@ -62,7 +58,10 @@ const CommentList = ({ commentSubmit, setCommentSubmit }) => {
         {comments.map((comment) => {
           return (
             <StyledLi key={comment.comment_id}>
-              <Comment comment={comment} />
+              <Comment
+                comment={comment}
+                setCommentDeleted={setCommentDeleted}
+              />
             </StyledLi>
           );
         })}

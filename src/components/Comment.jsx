@@ -3,8 +3,19 @@ import styled from "styled-components";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IconContext } from "react-icons";
 import { UserContext } from "../contexts/User";
-import { useContext, useState } from "react";
-import { BsThreeDots } from "react-icons/bs";
+import { useContext, useState, useEffect } from "react";
+import { deleteComment } from "../api";
+import { toast } from "react-toastify";
+import Loading from "./Loading";
+
+const CommentCard = styled.div`
+  border: solid 1px #cacdf7;
+  border-radius: 1em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+`;
 
 const CommentFooter = styled.div`
   text-align: center;
@@ -40,29 +51,51 @@ const StyledRiDeleteBin6Line = styled(RiDeleteBin6Line)`
   }
 `;
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, setCommentDeleted }) => {
   const { user } = useContext(UserContext);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [commentDisplay, setCommentDisplay] = useState(true);
 
-  const handleClick = (event) => {
+  const handleClick = () => {
     setIsDeleting(true);
-    console.log("please wait");
   };
+
+  useEffect(() => {
+    if (isDeleting) {
+      (async () => {
+        setCommentDisplay(false);
+        try {
+          await deleteComment(comment.comment_id);
+          toast.success("Comment deleted");
+          setIsDeleting(false);
+          setCommentDeleted(true);
+        } catch (err) {
+          setCommentDisplay(true);
+          toast.error("Oops! Something went wrong...");
+          setIsDeleting(false);
+        }
+      })();
+    }
+  }, [isDeleting]);
+
+  if (!commentDisplay) return <Loading>Deleting comment...</Loading>;
 
   return (
     <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
-      <CommentHeader>
-        <div>
-          {comment.author} {formatDate(comment.created_at)}
-        </div>
-        {comment.author === user.username ? (
-          <StyledButton onClick={handleClick} disabled={isDeleting}>
-            {isDeleting ? <BsThreeDots /> : <StyledRiDeleteBin6Line />}
-          </StyledButton>
-        ) : null}
-      </CommentHeader>
-      <CommentBody>{comment.body}</CommentBody>
-      <CommentFooter>{comment.votes}</CommentFooter>
+      <CommentCard>
+        <CommentHeader>
+          <div>
+            {comment.author} {formatDate(comment.created_at)}
+          </div>
+          {comment.author === user.username ? (
+            <StyledButton onClick={handleClick} disabled={isDeleting}>
+              <StyledRiDeleteBin6Line />
+            </StyledButton>
+          ) : null}
+        </CommentHeader>
+        <CommentBody>{comment.body}</CommentBody>
+        <CommentFooter>{comment.votes}</CommentFooter>
+      </CommentCard>
     </IconContext.Provider>
   );
 };
