@@ -19,6 +19,12 @@ const StyledUL = styled.ul`
 
 const StyledLi = styled.li`
   width: 100%;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  border: solid 1px #cacdf7;
+  border-radius: 1em;
 `;
 
 const CommentCountDiv = styled.div`
