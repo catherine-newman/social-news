@@ -44,7 +44,7 @@ const StyledRiDeleteBin6Line = styled(RiDeleteBin6Line)`
 
   &:hover {
     transform: scale(1.2);
-    color: #7a82e4;
+    color: #c82727;
     transition:
       transform 150ms ease,
       color 150ms ease;
