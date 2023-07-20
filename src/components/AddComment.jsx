@@ -94,6 +94,7 @@ const AddComment = ({ article_id, setCommentSubmit }) => {
         setFormDisplay(false);
         setSubmitDisabled(false);
         setCommentSubmit(true);
+        setComment(null);
       } catch (err) {
         toast.error("Oops! Something went wrong...");
         setSubmitDisabled(false);
