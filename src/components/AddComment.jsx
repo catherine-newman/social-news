@@ -4,12 +4,21 @@ import { UserContext } from "../contexts/User";
 import styled from "styled-components";
 import { postComment } from "../api";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const StyledAddCommentDiv = styled.div`
   border-bottom: 1px solid #4d5bb8;
   text-align: center;
   width: 100%;
   padding: 0 0 1.5em 0;
+`;
+
+const StyledLoginDiv = styled.div`
+  border-bottom: 1px solid #4d5bb8;
+  text-align: center;
+  width: 100%;
+  padding: 0 0 1.5em 0;
+  font-size: 1.2em;
 `;
 
 const StyledForm = styled.form`
@@ -110,6 +119,13 @@ const AddComment = ({ article_id, setCommentSubmit }) => {
       <StyledAddCommentDiv>
         <Button onClick={handleButtonClick}>Add Comment</Button>
       </StyledAddCommentDiv>
+    );
+
+  if (formDisplay && !user.username)
+    return (
+      <StyledLoginDiv>
+        Please <Link to="/users">login</Link> to write a comment.
+      </StyledLoginDiv>
     );
 
   return (
