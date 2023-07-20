@@ -49,3 +49,8 @@ export const getTopics = async () => {
   const res = await newsApi.get(`/topics`);
   return res.data.topics;
 };
+
+export const getUsers = async () => {
+  const res = await newsApi.get(`/users`);
+  return res.data.users;
+};
