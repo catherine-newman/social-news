@@ -113,7 +113,7 @@ const AddComment = ({ article_id, setCommentSubmit }) => {
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <label htmlFor="addcomment">Comment as {user}:</label>
+      <label htmlFor="addcomment">Comment as {user.username}:</label>
       <CharacterLimit>Max 500 characters</CharacterLimit>
       <StyledTextArea
         id="addcomment"

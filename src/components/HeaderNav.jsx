@@ -37,7 +37,7 @@ const HeaderNav = () => {
       </StyledNav>
       <div>{navHeader()}</div>
       <div>
-        <Link to="/users">{user}</Link>
+        <Link to="/users">{user.username}</Link>
       </div>
     </StyledHeader>
   );
