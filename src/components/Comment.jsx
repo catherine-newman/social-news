@@ -27,7 +27,7 @@ const CommentHeader = styled.div`
 `;
 
 const CommentBody = styled.div`
-  padding: 0em 0.5em;
+  padding: 0rem 0.5em;
 `;
 
 const StyledButton = styled.button`
@@ -54,7 +54,6 @@ const StyledRiDeleteBin6Line = styled(RiDeleteBin6Line)`
 const Comment = ({ comment, setCommentDeleted }) => {
   const { user } = useContext(UserContext);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [commentDisplay, setCommentDisplay] = useState(true);
 
   const handleClick = () => {
     setIsDeleting(true);
@@ -63,22 +62,20 @@ const Comment = ({ comment, setCommentDeleted }) => {
   useEffect(() => {
     if (isDeleting) {
       (async () => {
-        setCommentDisplay(false);
         try {
           await deleteComment(comment.comment_id);
           toast.success("Comment deleted");
           setIsDeleting(false);
           setCommentDeleted(true);
         } catch (err) {
-          setCommentDisplay(true);
           toast.error("Oops! Something went wrong...");
           setIsDeleting(false);
         }
       })();
     }
-  }, [isDeleting]);
+  }, [isDeleting, comment.comment_id, setCommentDeleted]);
 
-  if (!commentDisplay) return <Loading>Deleting comment...</Loading>;
+  if (isDeleting) return <Loading>Deleting comment...</Loading>;
 
   return (
     <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>

@@ -12,7 +12,7 @@ const Container = styled.div`
   gap: 1em;
   justify-items: center;
   width: 640px;
-  padding: 2em 2em 0 2em;
+  padding: 2rem 2rem 0 2em;
   background-color: #ffffff;
   margin-top: 2em;
   border-radius: 1em;
@@ -25,16 +25,16 @@ const Container = styled.div`
 
 const Article = () => {
   const { article_id } = useParams();
-  const [articleError, setArticleError] = useState(null);
+  const [error, setError] = useState(null);
   const [commentSubmit, setCommentSubmit] = useState(false);
-  if (articleError) return <ErrorPage status={articleError.response.status} />;
+  if (error) return <ErrorPage status={error.response.status} />;
   return (
     <StyledMain>
       <Container>
         <FullArticle
           setCommentSubmit={setCommentSubmit}
           article_id={article_id}
-          setArticleError={setArticleError}
+          setArticleError={setError}
         />
         <CommentList
           commentSubmit={commentSubmit}

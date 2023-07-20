@@ -6,19 +6,16 @@ import { postComment } from "../api";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
-const StyledAddCommentDiv = styled.div`
+const StyledDiv = styled.div`
   border-bottom: 1px solid #4d5bb8;
   text-align: center;
   width: 100%;
-  padding: 0 0 1.5em 0;
-`;
+  padding: 0 0 1.5rem 0;
+  font-size: 1.2rem;
 
-const StyledLoginDiv = styled.div`
-  border-bottom: 1px solid #4d5bb8;
-  text-align: center;
-  width: 100%;
-  padding: 0 0 1.5em 0;
-  font-size: 1.2em;
+  button {
+    font-size: 1rem;
+  }
 `;
 
 const StyledForm = styled.form`
@@ -32,7 +29,7 @@ const StyledForm = styled.form`
     "submit-button submit-button";
   gap: 0.2em;
   justify-content: space-between;
-  padding: 0 0 1em 0;
+  padding: 0 0 1rem 0;
   border-bottom: 1px solid #cacdf7;
 `;
 
@@ -49,7 +46,7 @@ const StyledTextArea = styled.textarea`
   border: #4d5bb8 solid 1px;
   border-radius: 0.5em;
   margin-bottom: 0.5em;
-  padding: 0.5em 1em;
+  padding: 0.5rem 1em;
   grid-area: main;
 
   &:focus {
@@ -116,16 +113,16 @@ const AddComment = ({ article_id, setCommentSubmit }) => {
 
   if (!formDisplay)
     return (
-      <StyledAddCommentDiv>
+      <StyledDiv>
         <Button onClick={handleButtonClick}>Add Comment</Button>
-      </StyledAddCommentDiv>
+      </StyledDiv>
     );
 
   if (formDisplay && !user.username)
     return (
-      <StyledLoginDiv>
+      <StyledDiv>
         Please <Link to="/users">login</Link> to write a comment.
-      </StyledLoginDiv>
+      </StyledDiv>
     );
 
   return (

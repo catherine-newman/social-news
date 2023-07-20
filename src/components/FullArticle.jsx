@@ -38,7 +38,7 @@ const ArticleFooter = styled.div`
   justify-content: space-evenly;
 `;
 
-const FullArticle = ({ setCommentSubmit, article_id, setArticleError }) => {
+const FullArticle = ({ setCommentSubmit, article_id, setError }) => {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [voteCount, setVoteCount] = useState(0);
@@ -53,7 +53,7 @@ const FullArticle = ({ setCommentSubmit, article_id, setArticleError }) => {
         setVoteCount(res.votes);
         setIsLoading(false);
       } catch (err) {
-        setArticleError(err);
+        setError(err);
       }
     })();
   }, [article_id]);

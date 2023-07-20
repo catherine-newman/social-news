@@ -25,11 +25,12 @@ const TopicList = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    (async () => {
+    const fetchTopics = async () => {
       const res = await getTopics();
       setTopics(res);
       setIsLoading(false);
-    })();
+    };
+    fetchTopics();
   }, []);
 
   if (isLoading) return <Loading>Loading topics...</Loading>;

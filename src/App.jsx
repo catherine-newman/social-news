@@ -1,33 +1,19 @@
-import "./App.css";
-import "./reset.css";
-import { Routes, Route, Outlet } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
-import Home from "./components/Home";
-import HeaderNav from "./components/HeaderNav";
-import Article from "./components/Article";
-import { ToastContainer } from "react-toastify";
+import "./styles/reset.css";
 import "react-toastify/dist/ReactToastify.min.css";
-import TopicList from "./components/TopicList";
-import ArticleList from "./components/ArticleList";
-import UserLogin from "./components/UserLogin";
-import ErrorPage from "./components/ErrorPage";
+import GlobalStyle from "./styles/GlobalStyle";
 
-const GlobalStyle = createGlobalStyle`
-body {
-    font-family: "Jost", sans-serif;
-    background-color: #cacdf7;
-}
+import { Routes, Route, Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-a {
-    text-decoration: none;
-    color: #4d5bb8;
-    font-weight: 700;
-}
-
-a:hover {
-    border-bottom: #4d5bb8 solid 1px;
-}
-`;
+import {
+  Home,
+  HeaderNav,
+  Article,
+  TopicList,
+  ArticleList,
+  UserLogin,
+  ErrorPage,
+} from "./components";
 
 function App() {
   return (

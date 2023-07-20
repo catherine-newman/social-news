@@ -5,9 +5,10 @@ const Button = styled.button`
   border: none;
   color: white;
   border-radius: 1em;
-  padding: 0.5em 2em 0.5em 2em;
+  padding: 0.5rem 2rem;
   margin: auto;
   cursor: pointer;
+  will-change: transform;
   transition: transform 0.1s ease-in-out;
 
   &:hover {

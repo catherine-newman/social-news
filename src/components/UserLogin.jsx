@@ -43,15 +43,16 @@ const UserLogin = () => {
   const [users, setUsers] = useState([]);
   const { user, setUser } = useContext(UserContext);
   useEffect(() => {
-    (async () => {
+    const fetchUsers = async () => {
       const res = await getUsers();
       setUsers(res);
-    })();
+    };
+    fetchUsers();
   }, []);
 
   const handleClick = (event) => {
     const newUserName = event.target.innerText;
-    const newUser = users.filter((user) => user.username === newUserName)[0];
+    const newUser = users.find((user) => user.username === newUserName);
     setUser(newUser);
     navigate(-1);
   };

@@ -8,7 +8,7 @@ import { IconContext } from "react-icons";
 const Card = styled.div`
   background-color: #ffffff;
   border-radius: 1em;
-  padding: 1em 1.5em;
+  padding: 1rem 1.5em;
   display: grid;
   grid-template-columns: 1fr;
   gap: 1em;
@@ -52,30 +52,41 @@ const VotesCommentsDiv = styled.div`
 `;
 
 const ArticleCard = ({ article }) => {
+  const {
+    author,
+    topic,
+    article_id,
+    created_at,
+    title,
+    article_img_url,
+    votes,
+    comment_count,
+  } = article;
+
   return (
-    <StyledLink to={`/${article.topic}/${article.article_id}`}>
+    <StyledLink to={`/${topic}/${article_id}`}>
       <Card>
         <CardHeader>
           <div>
-            {article.author} {formatDate(article.created_at)}
+            {author} {formatDate(created_at)}
           </div>
-          <div>{article.topic}</div>
+          <div>{topic}</div>
         </CardHeader>
         <CardBody>
-          <h2>{article.title}</h2>
+          <h2>{title}</h2>
           <div>
-            <img src={article.article_img_url} />
+            <img src={article_img_url} />
           </div>
         </CardBody>
         <CardFooter>
           <VotesCommentsDiv>
             <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
-              <HiOutlineArrowsUpDown /> {article.votes}
+              <HiOutlineArrowsUpDown /> {votes}
             </IconContext.Provider>
           </VotesCommentsDiv>
           <VotesCommentsDiv>
             <FaRegCommentDots />
-            {article.comment_count} Comments
+            {comment_count} Comments
           </VotesCommentsDiv>
         </CardFooter>
       </Card>

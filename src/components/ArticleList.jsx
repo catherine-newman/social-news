@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { getArticles } from "../api";
 import ArticleCard from "./ArticleCard";
 import Button from "./Button";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import StyledMain from "./StyledMain";
 import ArticleSort from "./ArticleSort";
 import Loading from "./Loading";
@@ -33,11 +33,16 @@ const ArticleList = () => {
   const [totalArticles, setTotalArticles] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const { topic } = useParams();
-  const [sortBy, setSortBy] = useState("created_at");
-  const [order, setOrder] = useState("desc");
+  // const [sortBy, setSortBy] = useState("created_at");
+  // const [order, setOrder] = useState("desc");
   const [error, setError] = useState(null);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
 
-  const fetchData = async () => {
+  const sortBy = searchParams.get("sort_by") || "created_at";
+  const order = searchParams.get("order") || "desc";
+
+  const fetchData = useCallback(async () => {
     try {
       setIsLoading(true);
       const res = await getArticles(topic, 1, sortBy, order);
@@ -48,7 +53,7 @@ const ArticleList = () => {
     } catch (err) {
       setError(err);
     }
-  };
+  }, [topic, sortBy, order]);
 
   const fetchMoreData = async () => {
     try {
@@ -65,18 +70,18 @@ const ArticleList = () => {
 
   useEffect(() => {
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortBy, order]);
+  }, [fetchData]);
 
   if (error) return <ErrorPage status={error.response.status} />;
 
   return (
     <StyledMain>
       <ArticleSort
-        setSortBy={setSortBy}
-        setOrder={setOrder}
+        // setSortBy={setSortBy}
+        // setOrder={setOrder}
         sortBy={sortBy}
         order={order}
+        searchParams={searchParams}
       />
       <StyledUL>
         {articles.map((article) => {
