@@ -89,7 +89,7 @@ const AddComment = ({ article_id, setCommentSubmit }) => {
   useEffect(() => {
     const addComment = async (article_id, user, comment) => {
       try {
-        await postComment(article_id, user, comment);
+        await postComment(article_id, user.username, comment);
         toast.success("Comment posted!");
         setFormDisplay(false);
         setSubmitDisabled(false);
