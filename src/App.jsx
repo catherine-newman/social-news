@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import TopicList from "./components/TopicList";
 import ArticleList from "./components/ArticleList";
 import UserLogin from "./components/UserLogin";
+import ErrorPage from "./components/ErrorPage";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -47,6 +48,7 @@ function App() {
           <Route path="/topics" element={<TopicList />} />
           <Route path="/topics/:topic" element={<ArticleList />} />
           <Route path="/users" element={<UserLogin />} />
+          <Route path="*" element={<ErrorPage status={404} />} />
         </Route>
       </Routes>
     </>

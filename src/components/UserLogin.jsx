@@ -4,6 +4,7 @@ import styled from "styled-components";
 import StyledMain from "./StyledMain";
 import { UserContext } from "../contexts/User";
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: grid;
@@ -38,6 +39,7 @@ const StyledButton = styled(Button)`
 `;
 
 const UserLogin = () => {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const { user, setUser } = useContext(UserContext);
   useEffect(() => {
@@ -51,6 +53,7 @@ const UserLogin = () => {
     const newUserName = event.target.innerText;
     const newUser = users.filter((user) => user.username === newUserName)[0];
     setUser(newUser);
+    navigate(-1);
   };
 
   return (

@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import StyledMain from "./StyledMain";
 import ArticleSort from "./ArticleSort";
 import Loading from "./Loading";
+import ErrorPage from "./ErrorPage";
 
 const StyledUL = styled.ul`
   list-style-type: none;
@@ -34,29 +35,40 @@ const ArticleList = () => {
   const { topic } = useParams();
   const [sortBy, setSortBy] = useState("created_at");
   const [order, setOrder] = useState("desc");
+  const [error, setError] = useState(null);
 
   const fetchData = async () => {
-    setIsLoading(true);
-    const res = await getArticles(topic, 1, sortBy, order);
-    setArticles(res.articles);
-    setPage(1);
-    setTotalArticles(res.total_count);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const res = await getArticles(topic, 1, sortBy, order);
+      setArticles(res.articles);
+      setPage(1);
+      setTotalArticles(res.total_count);
+      setIsLoading(false);
+    } catch (err) {
+      setError(err);
+    }
   };
 
   const fetchMoreData = async () => {
-    setIsLoading(true);
-    const res = await getArticles(topic, page + 1, sortBy, order);
-    setArticles([...articles, ...res.articles]);
-    setPage(page + 1);
-    setTotalArticles(res.total_count);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const res = await getArticles(topic, page + 1, sortBy, order);
+      setArticles([...articles, ...res.articles]);
+      setPage(page + 1);
+      setTotalArticles(res.total_count);
+      setIsLoading(false);
+    } catch (err) {
+      setError(err);
+    }
   };
 
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy, order]);
+
+  if (error) return <ErrorPage status={error.response.status} />;
 
   return (
     <StyledMain>

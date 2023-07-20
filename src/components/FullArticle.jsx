@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getArticle, patchArticle } from "../api";
 import { formatDate } from "../utilities/formatDate";
 import styled from "styled-components";
 import ArticleVote from "./ArticleVote";
 import { toast } from "react-toastify";
 import AddComment from "./AddComment";
+import Loading from "./Loading";
 
 const ArticleCard = styled.div`
   background-color: #ffffff;
@@ -37,20 +38,23 @@ const ArticleFooter = styled.div`
   justify-content: space-evenly;
 `;
 
-const FullArticle = ({ setCommentSubmit }) => {
+const FullArticle = ({ setCommentSubmit, article_id, setArticleError }) => {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const { article_id } = useParams();
   const [voteCount, setVoteCount] = useState(0);
   const [upVoteClicked, setUpVoteClicked] = useState(false);
   const [downVoteClicked, setDownVoteClicked] = useState(false);
 
   useEffect(() => {
     (async () => {
-      const res = await getArticle(article_id);
-      setArticle(res);
-      setVoteCount(res.votes);
-      setIsLoading(false);
+      try {
+        const res = await getArticle(article_id);
+        setArticle(res);
+        setVoteCount(res.votes);
+        setIsLoading(false);
+      } catch (err) {
+        setArticleError(err);
+      }
     })();
   }, [article_id]);
 
@@ -124,7 +128,7 @@ const FullArticle = ({ setCommentSubmit }) => {
     }
   };
 
-  if (isLoading) return <p>Loading article...</p>;
+  if (isLoading) return <Loading>Loading article...</Loading>;
 
   return (
     <>

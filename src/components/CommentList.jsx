@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getComments } from "../api";
 import Comment from "./Comment";
@@ -29,9 +28,8 @@ const CommentCountDiv = styled.div`
   margin: 0.5em;
 `;
 
-const CommentList = ({ commentSubmit, setCommentSubmit }) => {
+const CommentList = ({ commentSubmit, setCommentSubmit, article_id }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const { article_id } = useParams();
   const [comments, setComments] = useState([]);
   const [commentDeleted, setCommentDeleted] = useState(false);
 

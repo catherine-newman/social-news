@@ -3,6 +3,8 @@ import CommentList from "./CommentList";
 import styled from "styled-components";
 import { useState } from "react";
 import StyledMain from "./StyledMain";
+import { useParams } from "react-router-dom";
+import ErrorPage from "./ErrorPage";
 
 const Container = styled.div`
   display: grid;
@@ -22,14 +24,22 @@ const Container = styled.div`
 `;
 
 const Article = () => {
+  const { article_id } = useParams();
+  const [articleError, setArticleError] = useState(null);
   const [commentSubmit, setCommentSubmit] = useState(false);
+  if (articleError) return <ErrorPage status={articleError.response.status} />;
   return (
     <StyledMain>
       <Container>
-        <FullArticle setCommentSubmit={setCommentSubmit} />
+        <FullArticle
+          setCommentSubmit={setCommentSubmit}
+          article_id={article_id}
+          setArticleError={setArticleError}
+        />
         <CommentList
           commentSubmit={commentSubmit}
           setCommentSubmit={setCommentSubmit}
+          article_id={article_id}
         />
       </Container>
     </StyledMain>

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../contexts/User";
+import Button from "./Button";
 
 const StyledNav = styled.nav`
   text-align: center;
@@ -21,7 +22,7 @@ const StyledHeader = styled.header`
 `;
 
 const HeaderNav = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const { topic, article_id } = useParams();
   const navHeader = () => {
     if (article_id) {
@@ -30,6 +31,11 @@ const HeaderNav = () => {
       return <h1>{topic}</h1>;
     }
   };
+
+  const handleLogoutClick = () => {
+    setUser({});
+  };
+
   return (
     <StyledHeader>
       <StyledNav>
@@ -37,7 +43,10 @@ const HeaderNav = () => {
       </StyledNav>
       <div>{navHeader()}</div>
       <div>
-        <Link to="/users">{user.username}</Link>
+        <Link to="/users">{user.username ? user.username : "Login"}</Link>{" "}
+        {user.username ? (
+          <Button onClick={handleLogoutClick}>Logout</Button>
+        ) : null}
       </div>
     </StyledHeader>
   );
