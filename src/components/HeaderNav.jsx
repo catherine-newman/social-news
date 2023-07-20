@@ -1,13 +1,10 @@
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../contexts/User";
 import Button from "./Button";
-
-const StyledNav = styled.nav`
-  text-align: center;
-  justify-self: start;
-`;
+import Burger from "./Burger";
+import Menu from "./Menu";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -21,9 +18,29 @@ const StyledHeader = styled.header`
   }
 `;
 
+const useOnClickOutside = (ref, handler) => {
+  useEffect(() => {
+    const listener = (event) => {
+      if (!ref.current || ref.current.contains(event.target)) {
+        return;
+      }
+      handler(event);
+    };
+    document.addEventListener("mousedown", listener);
+    return () => {
+      document.removeEventListener("mousedown", listener);
+    };
+  }, [ref, handler]);
+};
+
 const HeaderNav = () => {
+  const node = useRef();
   const { user, setUser } = useContext(UserContext);
   const { topic, article_id } = useParams();
+  const [open, setOpen] = useState(false);
+
+  useOnClickOutside(node, () => setOpen(false));
+
   const navHeader = () => {
     if (article_id) {
       return <h2>{topic}</h2>;
@@ -38,9 +55,11 @@ const HeaderNav = () => {
 
   return (
     <StyledHeader>
-      <StyledNav>
-        <Link to="/">Home</Link> <Link to="/topics">Topics</Link>
-      </StyledNav>
+      <div ref={node}>
+        {" "}
+        <Burger open={open} setOpen={setOpen} />
+        <Menu open={open} setOpen={setOpen} />
+      </div>
       <div>{navHeader()}</div>
       <div>
         <Link to="/users">{user.username ? user.username : "Login"}</Link>{" "}
