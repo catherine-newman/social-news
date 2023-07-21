@@ -8,6 +8,8 @@ import { deleteComment } from "../api";
 import { toast } from "react-toastify";
 import Loading from "./Loading";
 import VisuallyHidden from "./VisuallyHidden";
+import CommentVote from "./CommentVote";
+import { patchComment } from "../api";
 
 const CommentCard = styled.div`
   border: solid 1px ${({ theme }) => theme.cardborder};
@@ -16,10 +18,6 @@ const CommentCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-`;
-
-const CommentFooter = styled.div`
-  text-align: center;
 `;
 
 const CommentHeader = styled.div`
@@ -56,6 +54,10 @@ const StyledRiDeleteBin6Line = styled(RiDeleteBin6Line)`
 const Comment = ({ comment, setCommentDeleted }) => {
   const { user } = useContext(UserContext);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [voteCount, setVoteCount] = useState(comment.votes);
+  const [upVoteClicked, setUpVoteClicked] = useState(false);
+  const [downVoteClicked, setDownVoteClicked] = useState(false);
+  const { comment_id } = comment;
 
   const handleClick = () => {
     setIsDeleting(true);
@@ -65,7 +67,7 @@ const Comment = ({ comment, setCommentDeleted }) => {
     if (isDeleting) {
       (async () => {
         try {
-          await deleteComment(comment.comment_id);
+          await deleteComment(comment_id);
           toast.success("Comment deleted");
           setIsDeleting(false);
           setCommentDeleted(true);
@@ -75,7 +77,79 @@ const Comment = ({ comment, setCommentDeleted }) => {
         }
       })();
     }
-  }, [isDeleting, comment.comment_id, setCommentDeleted]);
+  }, [isDeleting, comment_id, setCommentDeleted]);
+
+  const upVote = async (vote) => {
+    try {
+      const res = await patchComment(comment_id, vote);
+      setVoteCount(res.votes);
+    } catch (err) {
+      console.log(err);
+      toast.error("Oops! Something went wrong...");
+      setVoteCount(voteCount);
+      setUpVoteClicked(false);
+      if (vote === 2) {
+        setDownVoteClicked(true);
+      }
+    }
+  };
+
+  const downVote = async (vote) => {
+    try {
+      const res = await patchComment(comment_id, vote);
+      setVoteCount(res.votes);
+    } catch (err) {
+      toast.error("Oops! Something went wrong...");
+      setVoteCount(voteCount);
+      setDownVoteClicked(false);
+      if (vote === -2) {
+        setUpVoteClicked(true);
+      }
+    }
+  };
+
+  const handleUpVote = () => {
+    console.log("up clicked");
+    if (upVoteClicked) {
+      const newCount = voteCount - 1;
+      setVoteCount(newCount);
+      setUpVoteClicked(false);
+      downVote(-1);
+    } else {
+      setUpVoteClicked(true);
+      if (!downVoteClicked) {
+        const newCount = voteCount + 1;
+        setVoteCount(newCount);
+        upVote(1);
+      } else {
+        const newCount = voteCount + 2;
+        setVoteCount(newCount);
+        setDownVoteClicked(false);
+        upVote(2);
+      }
+    }
+  };
+
+  const handleDownVote = () => {
+    if (downVoteClicked) {
+      const newCount = voteCount + 1;
+      setVoteCount(newCount);
+      setDownVoteClicked(false);
+      upVote(1);
+    } else {
+      setDownVoteClicked(true);
+      if (!upVoteClicked) {
+        const newCount = voteCount - 1;
+        setVoteCount(newCount);
+        downVote(-1);
+      } else {
+        const newCount = voteCount - 2;
+        setVoteCount(newCount);
+        setUpVoteClicked(false);
+        downVote(-2);
+      }
+    }
+  };
 
   if (isDeleting) return <Loading>Deleting comment...</Loading>;
 
@@ -94,7 +168,13 @@ const Comment = ({ comment, setCommentDeleted }) => {
           ) : null}
         </CommentHeader>
         <CommentBody>{comment.body}</CommentBody>
-        <CommentFooter>{comment.votes}</CommentFooter>
+        <CommentVote
+          votes={voteCount}
+          handleUpVote={handleUpVote}
+          handleDownVote={handleDownVote}
+          upVoteClicked={upVoteClicked}
+          downVoteClicked={downVoteClicked}
+        />
       </CommentCard>
     </IconContext.Provider>
   );

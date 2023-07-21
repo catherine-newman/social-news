@@ -58,3 +58,10 @@ export const getUsers = async () => {
 export const deleteComment = async (comment_id) => {
   await newsApi.delete(`/comments/${comment_id}`);
 };
+
+export const patchComment = async (comment_id, vote) => {
+  const res = await newsApi.patch(`/comments/${comment_id}`, {
+    inc_votes: vote,
+  });
+  return res.data.comment;
+};

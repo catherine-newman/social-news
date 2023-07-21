@@ -14,7 +14,7 @@ Github repo: (https://github.com/catherine-newman/news-api)
 
 - User interaction - Make comments on an article. To make a comment, please login to the website using one of the provided usernames (click the button for whichever username you want to use).
 - Comment deletion - Users can delete their own comments.
-- Voting - Anyone can vote on an article - login is not necessary.
+- Voting - Anyone can vote on article and comments - login is not necessary.
 
 ## Built using:
 
