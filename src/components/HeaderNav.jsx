@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../contexts/User";
 import Burger from "./Burger";
@@ -149,10 +149,8 @@ const useOnClickOutside = (ref, handler) => {
 };
 
 const HeaderNav = ({ theme, toggleTheme }) => {
-  const { pathname } = useLocation();
   const node = useRef();
   const { user, setUser } = useContext(UserContext);
-  const { topic, article_id, author } = useParams();
   const [open, setOpen] = useState(false);
   useOnClickOutside(node, () => setOpen(false));
 
