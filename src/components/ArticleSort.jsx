@@ -6,11 +6,11 @@ import { useNavigate } from "react-router-dom";
 const StyledDiv = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 640px;
+  width: 1100px;
   padding: 0;
   margin-top: 1rem;
 
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 1200px) {
     width: 95%;
   }
 `;

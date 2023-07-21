@@ -63,6 +63,10 @@ const StyledSubmitButton = styled(Button)`
   }
 `;
 
+const StyledLink = styled(Link)`
+  font-weight: bold;
+`;
+
 const AddComment = ({ article_id, setCommentSubmit }) => {
   const [formDisplay, setFormDisplay] = useState(false);
   const { user } = useContext(UserContext);
@@ -122,7 +126,7 @@ const AddComment = ({ article_id, setCommentSubmit }) => {
   if (formDisplay && !user.username)
     return (
       <StyledDiv>
-        Please <Link to="/users">login</Link> to write a comment.
+        Please <StyledLink to="/users">login</StyledLink> to write a comment.
       </StyledDiv>
     );
 

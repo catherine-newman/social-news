@@ -19,7 +19,7 @@ const StyledMenu = styled.nav`
   right: 0;
   z-index: 9;
   font-size: 1.2em;
-  transform: ${({ open }) => (open ? "translateX(0)" : "translateX(+100%)")};
+  transform: ${({ open }) => (open ? "translateY(0)" : "translateY(-200%)")};
 
   @media (max-width: 650px) {
     width: 100%;

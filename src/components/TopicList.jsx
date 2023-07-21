@@ -10,14 +10,15 @@ const StyledUL = styled.ul`
   margin-top: 2em;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: masonry;
   gap: 2em;
-  width: 640px;
+  max-width: 1100px;
 
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 1200px) {
     width: 95%;
     gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 

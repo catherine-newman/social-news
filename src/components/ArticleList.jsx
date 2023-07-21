@@ -12,19 +12,22 @@ import ErrorPage from "./ErrorPage";
 const StyledUL = styled.ul`
   list-style-type: none;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 1em;
-  width: 640px;
+  max-width: 100%;
   padding: 0;
   margin-top: 1em;
+  width: 95%;
+  justify-items: center;
 
-  @media screen and (max-width: 640px) {
-    width: 95%;
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
   }
 `;
 
 const LoadMoreButton = styled(Button)`
   margin-bottom: 2em;
+  grid-column: 1 / -1;
 `;
 
 const ArticleList = () => {

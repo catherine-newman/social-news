@@ -10,18 +10,13 @@ import { FaMoon } from "react-icons/fa";
 import { BiSun } from "react-icons/bi";
 
 const HeaderContainer = styled.div`
-  max-width: 1100px;
-  width: 100%;
-  margin: auto;
   background: ${({ theme }) => theme.cardbackground};
-  border-radius: 0 0 1em 1em;
-
-  @media (max-width: 1100px) {
-    border-radius: 0;
-  }
 `;
 
 const Header = styled.header`
+  max-width: 1100px;
+  width: 100%;
+  margin: auto;
   display: grid;
   padding: 1.5em;
   grid-template-columns: 1fr 1fr 1fr;

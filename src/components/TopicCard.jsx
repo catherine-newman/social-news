@@ -7,6 +7,13 @@ const Card = styled.div`
   text-align: center;
   padding: 2em;
   border: ${({ theme }) => theme.cardborder} solid 1px;
+  will-change: transform;
+  transition: transform 450ms ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    transition: transform 150ms ease;
+  }
 `;
 
 const StyledLink = styled(Link)`
