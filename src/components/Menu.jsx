@@ -18,7 +18,7 @@ const StyledMenu = styled.nav`
   top: 3.5em;
   right: 0;
   z-index: 9;
-  font-size: 1.2em;
+  font-size: 1rem;
   transform: ${({ open }) => (open ? "translateY(0)" : "translateY(-200%)")};
 
   @media (max-width: 650px) {
@@ -79,6 +79,14 @@ const Avatar = styled.img`
   border-radius: 1em;
 `;
 
+const StyledLink = styled(Link)`
+  text-align: right;
+
+  @media (max-width: 650px) {
+    text-align: center;
+  }
+`;
+
 const Menu = ({ open }) => {
   const { user, setUser } = useContext(UserContext);
 
@@ -100,6 +108,7 @@ const Menu = ({ open }) => {
           "Login"
         )}
       </Link>
+      <StyledLink to="/newarticle">Post an article</StyledLink>
       <Logout onClick={handleLogoutClick}>
         {user.username ? (
           <>
