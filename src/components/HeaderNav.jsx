@@ -102,7 +102,7 @@ const ExtendedMenu = styled.div`
   }
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   font-weight: bold;
 `;
 
@@ -124,6 +124,17 @@ const Loginout = styled.button`
   @media (max-width: 650px) {
     text-align: center;
   }
+`;
+
+const Avatar = styled.img`
+  height: 2rem;
+  border-radius: 1em;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 `;
 
 const useOnClickOutside = (ref, handler) => {
@@ -188,7 +199,14 @@ const HeaderNav = ({ theme, toggleTheme }) => {
           </BurgerMenu>
           <ExtendedMenu>
             <Link to="/users">
-              {user.username ? user.username : <Loginout>Login</Loginout>}
+              {user.username ? (
+                <UserInfo>
+                  <Avatar src={user.avatar_url} />
+                  {user.username}
+                </UserInfo>
+              ) : (
+                <Loginout>Login</Loginout>
+              )}
             </Link>
             {user.username ? (
               <Loginout onClick={handleLogoutClick}>
