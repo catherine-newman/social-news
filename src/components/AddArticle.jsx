@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../contexts/User";
 import styled from "styled-components";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { postArticle, getTopics } from "../api";
 import StyledMain from "./StyledMain";
 import Loading from "./Loading";
@@ -137,6 +137,7 @@ const AddArticle = () => {
   const [article, setArticle] = useState();
   const [topics, setTopics] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -171,7 +172,13 @@ const AddArticle = () => {
   useEffect(() => {
     const addArticle = async (author, title, body, topic, article_img_url) => {
       try {
-        await postArticle(author, title, body, topic, article_img_url);
+        const res = await postArticle(
+          author,
+          title,
+          body,
+          topic,
+          article_img_url
+        );
         toast.success("Article posted!");
         setSubmitDisabled(false);
         setArticle(null);
@@ -182,6 +189,7 @@ const AddArticle = () => {
           topic: "",
           article_img_url: "",
         });
+        navigate(`/${res.topic}/${res.article_id}`);
       } catch (err) {
         toast.error("Oops! Something went wrong...");
         setSubmitDisabled(false);
