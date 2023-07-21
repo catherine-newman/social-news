@@ -20,7 +20,7 @@ const Header = styled.header`
   margin: auto;
   display: grid;
   padding: 1rem 1.5rem 0.5rem 1.5rem;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   h1,
   h2 {
@@ -84,10 +84,6 @@ const Nav = styled.nav`
   @media (max-width: 400px) {
     gap: 1rem;
   }
-`;
-
-const NavHeader = styled.div`
-  justify-self: center;
 `;
 
 const BurgerMenu = styled.div`
@@ -159,19 +155,6 @@ const HeaderNav = ({ theme, toggleTheme }) => {
   const { topic, article_id, author } = useParams();
   const [open, setOpen] = useState(false);
   useOnClickOutside(node, () => setOpen(false));
-  const navHeader = () => {
-    if (article_id) {
-      return <Link to={`/topics/${topic}`}># {topic}</Link>;
-    } else if (topic) {
-      return <h1># {topic}</h1>;
-    } else if (author) {
-      return <h1>{author}</h1>;
-    } else if (pathname === "/") {
-      return <h1>HOME</h1>;
-    } else if (pathname === "/topics") {
-      return <h1>TOPICS</h1>;
-    }
-  };
 
   const handleLogoutClick = () => {
     setUser({});
@@ -185,9 +168,9 @@ const HeaderNav = ({ theme, toggleTheme }) => {
             <StyledHome aria-hidden="false" />
             <VisuallyHidden>Home</VisuallyHidden>
           </Link>
-          <Link to="/topics">TOPICS</Link>
+          <Link to="/topics">Topics</Link>
+          <Link to="/newarticle">Post an article</Link>
         </Nav>
-        <NavHeader>{navHeader()}</NavHeader>
         <RightDiv>
           {theme === "light" ? (
             <StyledMoon onClick={toggleTheme} />

@@ -9,6 +9,11 @@ import ArticleSort from "./ArticleSort";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
 
+const StyledHeader = styled.h1`
+  padding: 1em;
+  text-align: center;
+`;
+
 const StyledUL = styled.ul`
   list-style-type: none;
   display: grid;
@@ -44,6 +49,7 @@ const ArticleList = () => {
   const { topic, author } = useParams();
   const [error, setError] = useState(null);
   const location = useLocation();
+  const { pathname } = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
   const sortBy = searchParams.get("sort_by") || "created_at";
@@ -79,10 +85,21 @@ const ArticleList = () => {
     fetchData();
   }, [fetchData]);
 
+  const navHeader = () => {
+    if (topic) {
+      return <StyledHeader># {topic}</StyledHeader>;
+    } else if (author) {
+      return <StyledHeader>Articles by {author}</StyledHeader>;
+    } else if (pathname === "/") {
+      return <StyledHeader>Home</StyledHeader>;
+    }
+  };
+
   if (error) return <ErrorPage status={error.response.status} />;
 
   return (
     <StyledMain>
+      {navHeader()}
       <ArticleSort sortBy={sortBy} order={order} searchParams={searchParams} />
       <StyledUL>
         {articles.map((article) => {

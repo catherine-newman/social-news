@@ -5,6 +5,11 @@ import TopicCard from "./TopicCard";
 import StyledMain from "./StyledMain";
 import Loading from "./Loading";
 
+const StyledHeader = styled.h1`
+  padding: 1em;
+  text-align: center;
+`;
+
 const StyledUL = styled.ul`
   list-style-type: none;
   margin-top: 2em;
@@ -39,6 +44,7 @@ const TopicList = () => {
 
   return (
     <StyledMain>
+      <StyledHeader>Topics</StyledHeader>
       <StyledUL>
         {topics.map((topic) => {
           return (

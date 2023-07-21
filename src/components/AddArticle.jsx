@@ -17,7 +17,8 @@ const StyledDiv = styled.div`
 `;
 
 const StyledHeader = styled.h1`
-  margin-top: 1em;
+  padding: 1em;
+  text-align: center;
 `;
 
 const StyledForm = styled.form`

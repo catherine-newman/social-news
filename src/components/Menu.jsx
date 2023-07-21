@@ -108,15 +108,16 @@ const Menu = ({ open }) => {
           "Login"
         )}
       </Link>
-      <StyledLink to="/newarticle">Post an article</StyledLink>
-      <Logout onClick={handleLogoutClick}>
-        {user.username ? (
-          <>
-            <div>Logout</div>
-            <StyledMdLogout />
-          </>
-        ) : null}
-      </Logout>
+      {user.username && (
+        <StyledLink to="/newarticle">Post an article</StyledLink>
+      )}
+      {/* <StyledLink to="/newarticle">Post an article</StyledLink> */}
+      {user.username && (
+        <Logout onClick={handleLogoutClick}>
+          <div>Logout</div>
+          <StyledMdLogout />
+        </Logout>
+      )}
     </StyledMenu>
   );
 };
