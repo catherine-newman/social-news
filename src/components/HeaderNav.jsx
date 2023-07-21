@@ -19,7 +19,7 @@ const Header = styled.header`
   width: 100%;
   margin: auto;
   display: grid;
-  padding: 1.5em;
+  padding: 1rem 1.5rem 0.5rem 1.5rem;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   h1,
@@ -110,7 +110,7 @@ const Loginout = styled.button`
   cursor: pointer;
   padding: 1rem 0;
   font-weight: normal;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
   display: flex;
   flex-direction: row;
@@ -203,7 +203,7 @@ const HeaderNav = ({ theme, toggleTheme }) => {
             {user.username ? (
               <Link to={`/authors/${user.username}`}>
                 <UserInfo>
-                  <Avatar src={user.avatar_url} />
+                  <Avatar src={user.avatar_url} alt={user.username} />
                   {user.username}
                 </UserInfo>
               </Link>

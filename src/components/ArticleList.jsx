@@ -13,6 +13,7 @@ const StyledUL = styled.ul`
   list-style-type: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: masonry;
   gap: 1em;
   max-width: 100%;
   padding: 0;
@@ -64,7 +65,7 @@ const ArticleList = () => {
   const fetchMoreData = async () => {
     try {
       setIsLoading(true);
-      const res = await getArticles(topic, page + 1, sortBy, order);
+      const res = await getArticles(topic, author, page + 1, sortBy, order);
       setArticles([...articles, ...res.articles]);
       setPage(page + 1);
       setTotalArticles(res.total_count);

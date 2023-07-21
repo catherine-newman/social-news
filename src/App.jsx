@@ -17,6 +17,7 @@ import {
   UserLogin,
   ErrorPage,
 } from "./components";
+import AddArticle from "./components/AddArticle";
 
 function App() {
   const [theme, themeToggler, themeReady] = useDarkMode();
@@ -48,6 +49,7 @@ function App() {
           <Route path="/topics/:topic" element={<ArticleList />} />
           <Route path="/users" element={<UserLogin />} />
           <Route path="/authors/:author" element={<ArticleList />} />
+          <Route path="/newarticle" element={<AddArticle />} />
           <Route path="*" element={<ErrorPage status={404} />} />
         </Route>
       </Routes>

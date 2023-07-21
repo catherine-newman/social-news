@@ -13,9 +13,6 @@ const Card = styled.div`
     opacity: 0.8;
     transition: opacity 125ms;
   }
-  img {
-    border-radius: 1.5em;
-  }
 `;
 
 const CardDetails = styled.div`
@@ -76,6 +73,9 @@ const StyledLink = styled(Link)`
 
 const ImageContainer = styled.div`
   padding-bottom: 2em;
+  img {
+    border-radius: 1em;
+  }
 `;
 
 const VotesCommentsDiv = styled.div`

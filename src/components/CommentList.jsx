@@ -14,6 +14,7 @@ const StyledUL = styled.ul`
   gap: 1em;
   justify-items: start;
   margin-bottom: 2em;
+  width: 100%;
 `;
 
 const StyledLi = styled.li`

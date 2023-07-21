@@ -12,10 +12,10 @@ const StyledMenu = styled.nav`
   background: ${({ theme }) => theme.cardbackground};
   height: auto;
   color: ${({ theme }) => theme.text};
-  text-align: left;
-  padding: 0em 4.5rem 2rem 2em;
+  text-align: right;
+  padding: 0em 3rem 1rem 2em;
   position: absolute;
-  top: 4em;
+  top: 3.5em;
   right: 0;
   z-index: 9;
   font-size: 1.2em;
@@ -24,7 +24,7 @@ const StyledMenu = styled.nav`
   @media (max-width: 650px) {
     width: 100%;
     border-radius: 0;
-    padding: 1rem 0 2rem 0;
+    padding: 1rem 0 1rem 0;
     top: 3em;
   }
 
@@ -39,10 +39,6 @@ const StyledMenu = styled.nav`
     font-weight: bold;
     color: ${({ theme }) => theme.text};
     text-decoration: none;
-
-    @media (max-width: 650px) {
-      text-align: center;
-    }
   }
 `;
 
@@ -55,15 +51,32 @@ const Logout = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  justify-content: center;
+  justify-content: end;
 
   @media (max-width: 650px) {
-    text-align: center;
+    justify-content: center;
   }
 `;
 
 const StyledMdLogout = styled(MdLogout)`
   font-size: 1.4rem;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 1rem;
+  justify-content: end;
+
+  @media (max-width: 650px) {
+    justify-content: center;
+  }
+`;
+
+const Avatar = styled.img`
+  height: 1rem;
+  border-radius: 1em;
 `;
 
 const Menu = ({ open }) => {
@@ -75,7 +88,18 @@ const Menu = ({ open }) => {
 
   return (
     <StyledMenu open={open}>
-      <Link to="/users">{user.username ? user.username : "Login"}</Link>
+      <Link to="/users">
+        {user.username ? (
+          <Link to={`/authors/${user.username}`}>
+            <UserInfo>
+              <Avatar src={user.avatar_url} alt={user.username} />
+              {user.username}
+            </UserInfo>
+          </Link>
+        ) : (
+          "Login"
+        )}
+      </Link>
       <Logout onClick={handleLogoutClick}>
         {user.username ? (
           <>

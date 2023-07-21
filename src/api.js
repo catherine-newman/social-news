@@ -68,3 +68,20 @@ export const patchComment = async (comment_id, vote) => {
   });
   return res.data.comment;
 };
+
+export const postArticle = async (
+  author,
+  title,
+  body,
+  topic,
+  article_img_url
+) => {
+  const res = await newsApi.post(`/articles/`, {
+    author: author,
+    title: title,
+    body: body,
+    topic: topic,
+    article_img_url: article_img_url,
+  });
+  return res.data.article;
+};

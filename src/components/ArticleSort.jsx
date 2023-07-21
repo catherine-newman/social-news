@@ -17,11 +17,12 @@ const StyledDiv = styled.div`
 
 const StyledButton = styled.button`
   background-color: ${(props) =>
-    props.$toggle
-      ? ({ theme }) => theme.secondbuttoncolortoggled
-      : ({ theme }) => theme.secondbuttoncolor};
+    props.$toggle ? ({ theme }) => theme.text : ({ theme }) => theme.accent};
   border: none;
-  color: #000;
+  color: ${(props) =>
+    props.$toggle
+      ? ({ theme }) => theme.cardbackground
+      : ({ theme }) => theme.text};
   text-transform: uppercase;
   padding: 0.5rem 1rem 0.5rem 1em;
   cursor: pointer;
