@@ -47,6 +47,7 @@ function App() {
           <Route path="/topics" element={<TopicList />} />
           <Route path="/topics/:topic" element={<ArticleList />} />
           <Route path="/users" element={<UserLogin />} />
+          <Route path="/authors/:author" element={<ArticleList />} />
           <Route path="*" element={<ErrorPage status={404} />} />
         </Route>
       </Routes>

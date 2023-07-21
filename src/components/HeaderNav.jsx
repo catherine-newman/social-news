@@ -156,7 +156,7 @@ const HeaderNav = ({ theme, toggleTheme }) => {
   const { pathname } = useLocation();
   const node = useRef();
   const { user, setUser } = useContext(UserContext);
-  const { topic, article_id } = useParams();
+  const { topic, article_id, author } = useParams();
   const [open, setOpen] = useState(false);
   useOnClickOutside(node, () => setOpen(false));
   const navHeader = () => {
@@ -164,6 +164,8 @@ const HeaderNav = ({ theme, toggleTheme }) => {
       return <p># {topic}</p>;
     } else if (topic) {
       return <h1># {topic}</h1>;
+    } else if (author) {
+      return <h1>{author}</h1>;
     } else if (pathname === "/") {
       return <h1>HOME</h1>;
     } else if (pathname === "/topics") {

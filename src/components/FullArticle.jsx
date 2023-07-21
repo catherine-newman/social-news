@@ -33,13 +33,18 @@ const ArticleDetails = styled.div`
   align-items: center;
   border-bottom: ${({ theme }) => theme.cardborder} solid 2px;
   margin-bottom: 2rem;
-  a {
-    background: ${({ theme }) => theme.accent};
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-    border-radius: 1rem;
-    color: ${({ theme }) => theme.text};
-  }
+`;
+
+const TopicLink = styled(Link)`
+  background: ${({ theme }) => theme.accent};
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 1rem;
+  color: ${({ theme }) => theme.text};
+`;
+
+const AuthorLink = styled(Link)`
+  font-weight: bold;
 `;
 
 const ArticleFooter = styled.div`
@@ -148,8 +153,14 @@ const FullArticle = ({ setCommentSubmit, article_id, setError }) => {
           {formatDate(article.created_at)}
           <h1>{article.title}</h1>
           <ArticleDetails>
-            by {article.author}
-            <Link to={`/topics/${article.topic}`}># {article.topic}</Link>
+            <div>
+              <AuthorLink to={`/authors/${article.author}`}>
+                by {article.author}
+              </AuthorLink>
+            </div>
+            <TopicLink to={`/topics/${article.topic}`}>
+              # {article.topic}
+            </TopicLink>
           </ArticleDetails>
           <p>{article.body}</p>
         </ArticleHeader>

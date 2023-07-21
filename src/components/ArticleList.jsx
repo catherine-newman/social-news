@@ -30,14 +30,17 @@ const LoadMoreButton = styled(Button)`
   grid-column: 1 / -1;
 `;
 
+const StyledLoading = styled(Loading)`
+  margin-bottom: 2em;
+  grid-column: 1 / -1;
+`;
+
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   const [totalArticles, setTotalArticles] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const { topic } = useParams();
-  // const [sortBy, setSortBy] = useState("created_at");
-  // const [order, setOrder] = useState("desc");
+  const { topic, author } = useParams();
   const [error, setError] = useState(null);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -48,7 +51,7 @@ const ArticleList = () => {
   const fetchData = useCallback(async () => {
     try {
       setIsLoading(true);
-      const res = await getArticles(topic, 1, sortBy, order);
+      const res = await getArticles(topic, author, 1, sortBy, order);
       setArticles(res.articles);
       setPage(1);
       setTotalArticles(res.total_count);
@@ -56,7 +59,7 @@ const ArticleList = () => {
     } catch (err) {
       setError(err);
     }
-  }, [topic, sortBy, order]);
+  }, [topic, sortBy, order, author]);
 
   const fetchMoreData = async () => {
     try {
@@ -79,13 +82,7 @@ const ArticleList = () => {
 
   return (
     <StyledMain>
-      <ArticleSort
-        // setSortBy={setSortBy}
-        // setOrder={setOrder}
-        sortBy={sortBy}
-        order={order}
-        searchParams={searchParams}
-      />
+      <ArticleSort sortBy={sortBy} order={order} searchParams={searchParams} />
       <StyledUL>
         {articles.map((article) => {
           return (
@@ -95,11 +92,11 @@ const ArticleList = () => {
           );
         })}
         {isLoading ? (
-          <Loading>Loading articles...</Loading>
+          <StyledLoading>Loading articles...</StyledLoading>
         ) : articles.length < totalArticles ? (
           <LoadMoreButton onClick={fetchMoreData}>Load more</LoadMoreButton>
         ) : (
-          <Loading>No more articles</Loading>
+          <StyledLoading>No more articles</StyledLoading>
         )}
       </StyledUL>
     </StyledMain>
