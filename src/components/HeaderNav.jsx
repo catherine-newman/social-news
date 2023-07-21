@@ -143,7 +143,6 @@ const useOnClickOutside = (ref, handler) => {
 
 const HeaderNav = ({ theme, toggleTheme }) => {
   const { pathname } = useLocation();
-  console.log(pathname);
   const node = useRef();
   const { user, setUser } = useContext(UserContext);
   const { topic, article_id } = useParams();

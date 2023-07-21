@@ -42,7 +42,7 @@ const CardHeader = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0.7rem 0 0 1rem;
-  h3 {
+  h2 {
     font-size: 1.2rem;
 
     @media screen and (max-width: 640px) {
@@ -106,7 +106,7 @@ const ArticleCard = ({ article }) => {
         </ImageContainer>
         <CardDetails>
           <CardHeader>
-            <h3>{title}</h3>
+            <h2>{title}</h2>
             <p>by {author}</p>
           </CardHeader>
           <CardFooter>

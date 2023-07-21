@@ -25,7 +25,7 @@ const TopicCard = ({ topic }) => {
   return (
     <StyledLink to={`/topics/${topic.slug}`}>
       <Card>
-        <h3># {topic.slug}</h3>
+        <h2># {topic.slug}</h2>
         <div>{topic.description}</div>
       </Card>
     </StyledLink>
