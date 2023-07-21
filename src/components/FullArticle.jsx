@@ -41,6 +41,17 @@ const TopicLink = styled(Link)`
   text-decoration: none;
   border-radius: 1rem;
   color: ${({ theme }) => theme.text};
+  transition:
+    color 450ms ease,
+    background 450ms ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.accent};
+    background: ${({ theme }) => theme.text};
+    transition:
+      color 150ms ease,
+      background 150ms ease;
+  }
 `;
 
 const AuthorLink = styled(Link)`

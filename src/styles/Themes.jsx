@@ -6,8 +6,9 @@ export const lightTheme = {
   cardborder: "#000",
   mainbuttoncolor: "#90e079",
   mainbuttoncolordisabled: "#c4f2b8",
+  mainbuttoncolorhover: "#67D449",
   secondbuttoncolor: "#F36F58",
-  secondbuttoncolortoggled: "#f4826d",
+  secondbuttoncolortoggled: "#F04A2D",
 };
 export const darkTheme = {
   background: "#363537 url(/bg_repeat.png) top left repeat",
@@ -17,6 +18,7 @@ export const darkTheme = {
   cardborder: "#fafafa",
   mainbuttoncolor: "#90e079",
   mainbuttoncolordisabled: "#c4f2b8",
+  mainbuttoncolorhover: "#67D449",
   secondbuttoncolor: "#F36F58",
-  secondbuttoncolortoggled: "#f4826d",
+  secondbuttoncolortoggled: "#F04A2D",
 };

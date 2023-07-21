@@ -158,7 +158,7 @@ const Comment = ({ comment, setCommentDeleted }) => {
       <CommentCard>
         <CommentHeader>
           <div>
-            {comment.author} {formatDate(comment.created_at)}
+            {comment.author} - {formatDate(comment.created_at)}
           </div>
           {comment.author === user.username ? (
             <StyledButton onClick={handleClick} disabled={isDeleting}>

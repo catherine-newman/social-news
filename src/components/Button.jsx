@@ -10,6 +10,12 @@ const Button = styled.button`
   cursor: pointer;
   text-transform: uppercase;
   font-weight: bold;
+  transition: background 150ms ease;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.mainbuttoncolorhover};
+    transition: background 150ms ease;
+  }
 `;
 
 export default Button;

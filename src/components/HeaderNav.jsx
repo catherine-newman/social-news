@@ -161,7 +161,7 @@ const HeaderNav = ({ theme, toggleTheme }) => {
   useOnClickOutside(node, () => setOpen(false));
   const navHeader = () => {
     if (article_id) {
-      return <p># {topic}</p>;
+      return <Link to={`/topics/${topic}`}># {topic}</Link>;
     } else if (topic) {
       return <h1># {topic}</h1>;
     } else if (author) {
@@ -200,16 +200,18 @@ const HeaderNav = ({ theme, toggleTheme }) => {
             <Menu open={open} setOpen={setOpen} />
           </BurgerMenu>
           <ExtendedMenu>
-            <Link to="/users">
-              {user.username ? (
+            {user.username ? (
+              <Link to={`/authors/${user.username}`}>
                 <UserInfo>
                   <Avatar src={user.avatar_url} />
                   {user.username}
                 </UserInfo>
-              ) : (
+              </Link>
+            ) : (
+              <Link to="/users">
                 <Loginout>Login</Loginout>
-              )}
-            </Link>
+              </Link>
+            )}
             {user.username ? (
               <Loginout onClick={handleLogoutClick}>
                 <div>Logout</div>
