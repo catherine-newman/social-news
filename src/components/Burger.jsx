@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import VisuallyHidden from "./VisuallyHidden";
 
 const StyledBurger = styled.button`
   top: 5%;
@@ -43,7 +44,8 @@ const StyledBurger = styled.button`
 
 const Burger = ({ open, setOpen }) => {
   return (
-    <StyledBurger open={open} onClick={() => setOpen(!open)}>
+    <StyledBurger open={open} onClick={() => setOpen(!open)} aria-hidden="true">
+      <VisuallyHidden>Burger Menu Icon</VisuallyHidden>
       <div />
       <div />
       <div />

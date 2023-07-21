@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../contexts/User";
 import Burger from "./Burger";
@@ -8,6 +8,7 @@ import { MdLogout } from "react-icons/md";
 import { HiHome } from "react-icons/hi";
 import { FaMoon } from "react-icons/fa";
 import { BiSun } from "react-icons/bi";
+import VisuallyHidden from "./VisuallyHidden";
 
 const HeaderContainer = styled.div`
   background: ${({ theme }) => theme.cardbackground};
@@ -105,7 +106,7 @@ const ExtendedMenu = styled.div`
   font-weight: bold;
 `;
 
-const Loginout = styled.div`
+const Loginout = styled.button`
   cursor: pointer;
   padding: 1rem 0;
   font-weight: normal;
@@ -116,6 +117,9 @@ const Loginout = styled.div`
   align-items: center;
   gap: 0.5rem;
   justify-content: center;
+  background: none;
+  border: none;
+  color: ${({ theme }) => theme.text};
 
   @media (max-width: 650px) {
     text-align: center;
@@ -138,6 +142,8 @@ const useOnClickOutside = (ref, handler) => {
 };
 
 const HeaderNav = ({ theme, toggleTheme }) => {
+  const { pathname } = useLocation();
+  console.log(pathname);
   const node = useRef();
   const { user, setUser } = useContext(UserContext);
   const { topic, article_id } = useParams();
@@ -145,9 +151,13 @@ const HeaderNav = ({ theme, toggleTheme }) => {
   useOnClickOutside(node, () => setOpen(false));
   const navHeader = () => {
     if (article_id) {
-      return <h2># {topic}</h2>;
+      return <p># {topic}</p>;
     } else if (topic) {
       return <h1># {topic}</h1>;
+    } else if (pathname === "/") {
+      return <h1>HOME</h1>;
+    } else if (pathname === "/topics") {
+      return <h1>TOPICS</h1>;
     }
   };
 
@@ -160,7 +170,8 @@ const HeaderNav = ({ theme, toggleTheme }) => {
       <Header>
         <Nav>
           <Link to="/">
-            <StyledHome />
+            <StyledHome aria-hidden="false" />
+            <VisuallyHidden>Home</VisuallyHidden>
           </Link>
           <Link to="/topics">TOPICS</Link>
         </Nav>
@@ -180,15 +191,12 @@ const HeaderNav = ({ theme, toggleTheme }) => {
             <Link to="/users">
               {user.username ? user.username : <Loginout>Login</Loginout>}
             </Link>
-
-            <Loginout onClick={handleLogoutClick}>
-              {user.username ? (
-                <>
-                  <div>Logout</div>
-                  <StyledMdLogout />
-                </>
-              ) : null}
-            </Loginout>
+            {user.username ? (
+              <Loginout onClick={handleLogoutClick}>
+                <div>Logout</div>
+                <StyledMdLogout />
+              </Loginout>
+            ) : null}
           </ExtendedMenu>
         </RightDiv>
       </Header>

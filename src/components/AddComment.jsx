@@ -49,6 +49,7 @@ const StyledTextArea = styled.textarea`
   margin-bottom: 0.5em;
   padding: 0.5rem 1em;
   grid-area: main;
+  color: ${({ theme }) => theme.text};
 
   &:focus {
     outline: ${({ theme }) => theme.mainbuttoncolor} solid 3px;

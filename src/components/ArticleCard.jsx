@@ -42,7 +42,7 @@ const CardHeader = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0.7rem 0 0 1rem;
-  h2 {
+  h3 {
     font-size: 1.2rem;
 
     @media screen and (max-width: 640px) {
@@ -102,21 +102,22 @@ const ArticleCard = ({ article }) => {
     <StyledLink to={`/${topic}/${article_id}`}>
       <Card>
         <ImageContainer>
-          <img src={article_img_url} />
+          <img src={article_img_url} alt={title} />
         </ImageContainer>
         <CardDetails>
           <CardHeader>
-            <h2>{title}</h2>
+            <h3>{title}</h3>
             <p>by {author}</p>
           </CardHeader>
           <CardFooter>
             <VotesCommentsDiv>
-              <FaRegCommentDots />
+              <FaRegCommentDots aria-hidden="true" focusable="false" />
               {comment_count} Comments
             </VotesCommentsDiv>
             <VotesCommentsDiv>
               <IconContext.Provider value={{ style: { fontSize: "1.3em" } }}>
-                <HiOutlineArrowsUpDown /> {votes} votes
+                <HiOutlineArrowsUpDown aria-hidden="true" focusable="false" />{" "}
+                {votes} votes
               </IconContext.Provider>
             </VotesCommentsDiv>
             <div>{formatDate(created_at)}</div>

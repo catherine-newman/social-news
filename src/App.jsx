@@ -28,7 +28,11 @@ function App() {
   return (
     <ThemeProvider theme={themeMode}>
       <GlobalStyle />
-      <ToastContainer position="top-center" hideProgressBar="true" />
+      <ToastContainer
+        position="top-center"
+        hideProgressBar="true"
+        theme={theme}
+      />
       <Routes>
         <Route
           element={

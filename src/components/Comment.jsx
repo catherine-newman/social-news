@@ -7,6 +7,7 @@ import { useContext, useState, useEffect } from "react";
 import { deleteComment } from "../api";
 import { toast } from "react-toastify";
 import Loading from "./Loading";
+import VisuallyHidden from "./VisuallyHidden";
 
 const CommentCard = styled.div`
   border: solid 1px ${({ theme }) => theme.cardborder};
@@ -88,6 +89,7 @@ const Comment = ({ comment, setCommentDeleted }) => {
           {comment.author === user.username ? (
             <StyledButton onClick={handleClick} disabled={isDeleting}>
               <StyledRiDeleteBin6Line />
+              <VisuallyHidden>Delete comment</VisuallyHidden>
             </StyledButton>
           ) : null}
         </CommentHeader>

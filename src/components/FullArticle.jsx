@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import AddComment from "./AddComment";
 import Loading from "./Loading";
 
-const ArticleCard = styled.div`
+const ArticleCard = styled.article`
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -143,7 +143,7 @@ const FullArticle = ({ setCommentSubmit, article_id, setError }) => {
   return (
     <>
       <ArticleCard>
-        <img src={article.article_img_url} />
+        <img src={article.article_img_url} alt={article.title} />
         <ArticleHeader>
           {formatDate(article.created_at)}
           <h1>{article.title}</h1>
