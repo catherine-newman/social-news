@@ -13,12 +13,12 @@ const Container = styled.div`
   justify-items: center;
   max-width: 920px;
   width: 100%;
-  padding: 2rem 2rem 0 2em;
+  padding: 0rem 2rem 0 2em;
   margin-top: 2em;
   margin-bottom: 2em;
 
-  @media screen and (max-width: 640px) {
-    width: 95%;
+  @media screen and (max-width: 400px) {
+    padding: 0rem 1rem 0 1em;
   }
 `;
 

@@ -5,11 +5,11 @@ body {
     font-family: "Jost", sans-serif;
     background: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.text};
-    transition: background 0.50s linear;
+    transition: color 350ms ease, background 350ms ease;
 }
 
 a {
-    text-decoration: underline;
+    text-decoration: none;
     color: ${({ theme }) => theme.text};
 }
 `;

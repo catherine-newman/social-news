@@ -8,7 +8,7 @@ const StyledDiv = styled.div`
   grid-template-columns: repeat(3, 1fr);
   width: 640px;
   padding: 0;
-  margin-top: 2em;
+  margin-top: 1rem;
 
   @media screen and (max-width: 640px) {
     width: 95%;
@@ -19,7 +19,6 @@ const StyledButton = styled.button`
   background-color: ${(props) => (props.$toggle ? "#F36F58" : "#f4826d")};
   border: none;
   color: #000;
-  font-weight: bold;
   text-transform: uppercase;
   padding: 0.5rem 1rem 0.5rem 1em;
   cursor: pointer;
@@ -27,6 +26,9 @@ const StyledButton = styled.button`
   gap: 0.5em;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 400px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const StyledButtonDate = styled(StyledButton)`

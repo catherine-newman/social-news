@@ -18,6 +18,12 @@ const ArticleHeader = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem 2rem;
+  @media (max-width: 650px) {
+    padding: 1rem 1rem;
+    h1 {
+      font-size: 1.3rem;
+    }
+  }
 `;
 
 const ArticleDetails = styled.div`

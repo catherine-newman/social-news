@@ -32,6 +32,10 @@ const CardDetails = styled.div`
   display: flex;
   flex-direction: column;
   border-bottom: ${({ theme }) => theme.cardborder} solid 1px;
+
+  @media screen and (max-width: 400px) {
+    max-height: 7.5rem;
+  }
 `;
 
 const CardHeader = styled.div`
@@ -40,6 +44,14 @@ const CardHeader = styled.div`
   padding: 0.7rem 0 0 1rem;
   h2 {
     font-size: 1.2rem;
+
+    @media screen and (max-width: 640px) {
+      font-size: 1.1rem;
+    }
+
+    @media screen and (max-width: 400px) {
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -51,6 +63,9 @@ const CardFooter = styled.div`
   padding-bottom: 0.5rem;
   padding-left: 1rem;
   gap: 1rem;
+  @media screen and (max-width: 400px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const StyledLink = styled(Link)`

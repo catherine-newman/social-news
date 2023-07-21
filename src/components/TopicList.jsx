@@ -17,6 +17,7 @@ const StyledUL = styled.ul`
 
   @media screen and (max-width: 640px) {
     width: 95%;
+    gap: 1rem;
   }
 `;
 

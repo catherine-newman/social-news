@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 const StyledMain = styled.main`
   display: flex;
-  max-width: 100%;
+  max-width: 1100px;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
