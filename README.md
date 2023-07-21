@@ -1,8 +1,8 @@
 # News Site
 
-An interactive news site that allows users to vote and comment on articles. The site allows filtering by topic and multiple sorting options.  
+An interactive news site that allows users to post, vote and comment on articles. The site allows filtering by topic and multiple sorting options.  
 This site was made using React as the front-end portion of a full stack project, connecting to a back-end API that I created previously.
-Voting, commenting, filtering sorting, posting and deleting are all handled by this API.
+Voting, commenting, filtering, sorting, posting and deleting are all handled by this API.
 
 A hosted version of this project can be found [here](https://main--subtle-wisp-17479d.netlify.app/).  
 (Please allow 30 seconds for it to spin up before viewing)
@@ -12,7 +12,8 @@ Github repo: (https://github.com/catherine-newman/news-api)
 
 ## Features
 
-- User interaction - Make comments on an article. To make a comment, please login to the website using one of the provided usernames (click the button for whichever username you want to use).
+- User content - Post an article to the site. To make a post, please login to the website using one of the provided usernames (click the button for whichever username you want to use).
+- User interaction - Signed in users can comment on an article.
 - Comment deletion - Users can delete their own comments.
 - Voting - Anyone can vote on article and comments - login is not necessary.
 
