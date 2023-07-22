@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../contexts/User";
-import Burger from "./Burger";
-import Menu from "./Menu";
-import { MdLogout } from "react-icons/md";
+import BurgerMenuIcon from "./BurgerMenuIcon";
+import BurgerMenuList from "./BurgerMenuList";
+// import { MdLogout } from "react-icons/md";
 import { HiHome } from "react-icons/hi";
 import { FaMoon } from "react-icons/fa";
 import { BiSun } from "react-icons/bi";
 import VisuallyHidden from "./VisuallyHidden";
+import UserMenuIcon from "./UserMenuIcon";
 
 const HeaderContainer = styled.div`
   background: ${({ theme }) => theme.cardbackground};
@@ -19,13 +20,10 @@ const Header = styled.header`
   width: 100%;
   margin: auto;
   display: grid;
-  padding: 1rem 1.5rem 0.5rem 1.5rem;
+  padding: 1rem 1.5rem 1rem 1.5rem;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  h1,
-  h2 {
-    font-size: 1.2em;
-  }
+  justify-content: space-between;
 
   @media (max-width: 400px) {
     padding: 1rem;
@@ -43,9 +41,9 @@ const RightDiv = styled.div`
   }
 `;
 
-const StyledMdLogout = styled(MdLogout)`
-  font-size: 1.4rem;
-`;
+// const StyledMdLogout = styled(MdLogout)`
+//   font-size: 1.4rem;
+// `;
 
 const StyledHome = styled(HiHome)`
   cursor: pointer;
@@ -77,61 +75,75 @@ const StyledSun = styled(BiSun)`
     transform: scale(1.1);
 `;
 
-const Nav = styled.nav`
+const PCNav = styled.nav`
   display: flex;
   align-items: center;
   gap: 2rem;
-  @media (max-width: 400px) {
-    gap: 1rem;
+  @media (max-width: 550px) {
+    display: none;
+  }
+`;
+
+const MobileNav = styled.nav`
+  display: flex;
+  align-items: center;
+  @media (min-width: 551px) {
+    display: none;
   }
 `;
 
 const BurgerMenu = styled.div`
-  @media (min-width: 1110px) {
+  @media (min-width: 551px) {
     display: none;
   }
 `;
 
-const ExtendedMenu = styled.div`
-  @media (max-width: 1110px) {
+const UserMenu = styled.div`
+  @media (max-width: 550px) {
     display: none;
   }
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  font-weight: bold;
 `;
 
-const Loginout = styled.button`
-  cursor: pointer;
-  padding: 1rem 0;
-  font-weight: normal;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  justify-content: center;
-  background: none;
-  border: none;
-  color: ${({ theme }) => theme.text};
+// const ExtendedMenu = styled.div`
+//   @media (max-width: 1110px) {
+//     display: none;
+//   }
+//   display: flex;
+//   align-items: center;
+//   gap: 1.5rem;
+//   font-weight: bold;
+// `;
 
-  @media (max-width: 650px) {
-    text-align: center;
-  }
-`;
+// const Loginout = styled.button`
+//   cursor: pointer;
+//   padding: 1rem 0;
+//   font-weight: normal;
+//   font-size: 0.9rem;
+//   text-transform: uppercase;
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   gap: 0.5rem;
+//   justify-content: center;
+//   background: none;
+//   border: none;
+//   color: ${({ theme }) => theme.text};
 
-const Avatar = styled.img`
-  height: 2rem;
-  border-radius: 1em;
-`;
+//   @media (max-width: 650px) {
+//     text-align: center;
+//   }
+// `;
 
-const UserInfo = styled.div`
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-`;
+// const Avatar = styled.img`
+//   height: 2.5em;
+//   border-radius: 1em;
+// `;
+
+// const UserInfo = styled.div`
+//   display: flex;
+//   gap: 1rem;
+//   align-items: center;
+// `;
 
 const useOnClickOutside = (ref, handler) => {
   useEffect(() => {
@@ -149,38 +161,61 @@ const useOnClickOutside = (ref, handler) => {
 };
 
 const HeaderNav = ({ theme, toggleTheme }) => {
-  const node = useRef();
-  const { user, setUser } = useContext(UserContext);
-  const [open, setOpen] = useState(false);
-  useOnClickOutside(node, () => setOpen(false));
+  const burgerNode = useRef();
+  const userNode = useRef();
+  const { user } = useContext(UserContext);
+  const [burgerOpen, setBurgerOpen] = useState(false);
+  const [userOpen, setUserOpen] = useState(false);
+  const location = useLocation();
+  useOnClickOutside(burgerNode, () => setBurgerOpen(false));
+  useOnClickOutside(userNode, () => setUserOpen(false));
+  console.log(user);
 
-  const handleLogoutClick = () => {
-    setUser({});
-  };
+  useEffect(() => {
+    setBurgerOpen(false);
+    setUserOpen(false);
+  }, [location]);
+
+  // const handleLogoutClick = () => {
+  //   setUser({});
+  // };
 
   return (
     <HeaderContainer>
       <Header>
-        <Nav>
+        <PCNav>
           <Link to="/">
             <StyledHome aria-hidden="false" />
             <VisuallyHidden>Home</VisuallyHidden>
           </Link>
           <Link to="/topics">Topics</Link>
           <Link to="/newarticle">Post an article</Link>
-        </Nav>
+        </PCNav>
+        <MobileNav>
+          <Link to="/">
+            <StyledHome aria-hidden="false" />
+            <VisuallyHidden>Home</VisuallyHidden>
+          </Link>
+        </MobileNav>
         <RightDiv>
           {theme === "light" ? (
             <StyledMoon onClick={toggleTheme} />
           ) : (
             <StyledSun onClick={toggleTheme} />
           )}
-          <BurgerMenu ref={node}>
+          <BurgerMenu ref={burgerNode}>
             {" "}
-            <Burger open={open} setOpen={setOpen} />
-            <Menu open={open} setOpen={setOpen} />
+            <BurgerMenuIcon open={burgerOpen} setOpen={setBurgerOpen} />
+            <BurgerMenuList open={burgerOpen} setOpen={setBurgerOpen} />
           </BurgerMenu>
-          <ExtendedMenu>
+          <UserMenu ref={userNode}>
+            <UserMenuIcon
+              img={user.avatar_url}
+              open={userOpen}
+              setOpen={setUserOpen}
+            />
+          </UserMenu>
+          {/* <ExtendedMenu>
             {user.username ? (
               <Link to={`/authors/${user.username}`}>
                 <UserInfo>
@@ -199,7 +234,7 @@ const HeaderNav = ({ theme, toggleTheme }) => {
                 <StyledMdLogout />
               </Loginout>
             ) : null}
-          </ExtendedMenu>
+          </ExtendedMenu> */}
         </RightDiv>
       </Header>
     </HeaderContainer>

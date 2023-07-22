@@ -42,7 +42,7 @@ const StyledBurger = styled.button`
   }
 `;
 
-const Burger = ({ open, setOpen }) => {
+const BurgerMenuIcon = ({ open, setOpen }) => {
   return (
     <StyledBurger open={open} onClick={() => setOpen(!open)} aria-hidden="true">
       <VisuallyHidden>Burger Menu Icon</VisuallyHidden>
@@ -53,4 +53,4 @@ const Burger = ({ open, setOpen }) => {
   );
 };
 
-export default Burger;
+export default BurgerMenuIcon;

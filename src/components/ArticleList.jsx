@@ -91,7 +91,7 @@ const ArticleList = () => {
     } else if (author) {
       return <StyledHeader>Articles by {author}</StyledHeader>;
     } else if (pathname === "/") {
-      return <StyledHeader>Home</StyledHeader>;
+      return <StyledHeader>Latest articles</StyledHeader>;
     }
   };
 
