@@ -33,7 +33,7 @@ const Article = () => {
         <FullArticle
           setCommentSubmit={setCommentSubmit}
           article_id={article_id}
-          setArticleError={setError}
+          setError={setError}
         />
         <CommentList
           commentSubmit={commentSubmit}

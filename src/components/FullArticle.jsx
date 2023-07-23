@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { getArticle, patchArticle } from "../api";
+import { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/User";
+import { getArticle, patchArticle, deleteArticle } from "../api";
 import { formatDate } from "../utilities/formatDate";
 import styled from "styled-components";
 import ArticleVote from "./ArticleVote";
 import { toast } from "react-toastify";
 import AddComment from "./AddComment";
 import Loading from "./Loading";
+import Button from "./Button";
 
 const ArticleCard = styled.article`
   display: flex;
@@ -60,7 +62,24 @@ const AuthorLink = styled(Link)`
 
 const ArticleFooter = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+`;
+
+const StyledButton = styled(Button)`
+  background-color: ${({ theme }) => theme.secondbuttoncolor};
+  transition: background 150ms ease;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.secondbuttoncolortoggled};
+    transition: background 150ms ease;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: ${({ theme }) => theme.secondbuttoncolordisabled};
+  }
 `;
 
 const FullArticle = ({ setCommentSubmit, article_id, setError }) => {
@@ -69,6 +88,9 @@ const FullArticle = ({ setCommentSubmit, article_id, setError }) => {
   const [voteCount, setVoteCount] = useState(0);
   const [upVoteClicked, setUpVoteClicked] = useState(false);
   const [downVoteClicked, setDownVoteClicked] = useState(false);
+  const { user } = useContext(UserContext);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -154,6 +176,30 @@ const FullArticle = ({ setCommentSubmit, article_id, setError }) => {
     }
   };
 
+  const handleDelete = () => {
+    setIsDeleting(true);
+  };
+
+  useEffect(() => {
+    const removeArticle = async () => {
+      try {
+        await deleteArticle(article_id);
+        toast.success("Article deleted!");
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      } catch (err) {
+        toast.error("Oops! Something went wrong...");
+        setIsDeleting(false);
+      }
+    };
+    if (isDeleting) {
+      toast.promise(removeArticle(), {
+        pending: "Deleting article...",
+      });
+    }
+  }, [isDeleting, article_id, navigate]);
+
   if (isLoading) return <Loading>Loading article...</Loading>;
 
   return (
@@ -176,6 +222,11 @@ const FullArticle = ({ setCommentSubmit, article_id, setError }) => {
           <p>{article.body}</p>
         </ArticleHeader>
         <ArticleFooter>
+          {article.author === user.username && (
+            <StyledButton onClick={handleDelete} disabled={isDeleting}>
+              Delete article
+            </StyledButton>
+          )}
           <ArticleVote
             votes={voteCount}
             handleUpVote={handleUpVote}

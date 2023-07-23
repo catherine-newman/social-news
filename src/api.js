@@ -85,3 +85,7 @@ export const postArticle = async (
   });
   return res.data.article;
 };
+
+export const deleteArticle = async (article_id) => {
+  await newsApi.delete(`/articles/${article_id}`);
+};

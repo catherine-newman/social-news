@@ -140,7 +140,6 @@ const HeaderNav = ({ theme, toggleTheme }) => {
   const location = useLocation();
   useOnClickOutside(burgerNode, () => setBurgerOpen(false));
   useOnClickOutside(userNode, () => setUserOpen(false));
-  console.log(user);
 
   useEffect(() => {
     setBurgerOpen(false);

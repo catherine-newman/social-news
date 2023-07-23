@@ -9,6 +9,7 @@ export const lightTheme = {
   mainbuttoncolorhover: "#67D449",
   secondbuttoncolor: "#F36F58",
   secondbuttoncolortoggled: "#F04A2D",
+  secondbuttoncolordisabled: "#e8998b",
 };
 export const darkTheme = {
   background: "#363537 url(/bg_repeat.png) top left repeat",
@@ -21,4 +22,5 @@ export const darkTheme = {
   mainbuttoncolorhover: "#67D449",
   secondbuttoncolor: "#F36F58",
   secondbuttoncolortoggled: "#F04A2D",
+  secondbuttoncolordisabled: "#e8998b",
 };

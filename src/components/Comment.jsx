@@ -109,7 +109,6 @@ const Comment = ({ comment, setCommentDeleted }) => {
   };
 
   const handleUpVote = () => {
-    console.log("up clicked");
     if (upVoteClicked) {
       const newCount = voteCount - 1;
       setVoteCount(newCount);
