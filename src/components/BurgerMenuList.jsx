@@ -13,7 +13,6 @@ const StyledMenu = styled.nav`
   left: 0;
   z-index: 9;
   width: 100%;
-  // transition: transform 0.1s ease-in-out;
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(+100%)")};
 `;
 
@@ -66,6 +65,7 @@ const Menu = ({ open, setOpen }) => {
         {user.username ? (
           <>
             <Link to="/newarticle">Post an article</Link>
+            <Link to="/topics">Topics</Link>
             <Link to={`/authors/${user.username}`}>View your articles</Link>
             <Logout onClick={handleLogoutClick}>
               <div>Logout</div>
@@ -73,7 +73,10 @@ const Menu = ({ open, setOpen }) => {
             </Logout>
           </>
         ) : (
-          <Link to="/users">Login</Link>
+          <>
+            <Link to="/topics">Topics</Link>
+            <Link to="/users">Login</Link>
+          </>
         )}
       </LinkList>
     </StyledMenu>

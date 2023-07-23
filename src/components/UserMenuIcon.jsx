@@ -10,27 +10,13 @@ const StyledUserMenuIcon = styled.button`
   cursor: pointer;
   padding: 0;
   z-index: 10;
-
-  //   &:focus {
-  //     outline: none;
-  //   }
-
-  //   div {
-  //     width: 2rem;
-  //     height: 0.25rem;
-  //     background: ${({ theme }) => theme.cardborder};
-  //     border-radius: 10px;
-  //     transition: all 0.1s linear;
-  //     position: relative;
-  //   }
 `;
 
 const UserImage = styled.span`
-  background-image: url(${(props) => props.$img});
-  background-size: contain;
-  background-repeat: no-repeat;
+  background: center / contain no-repeat url(${(props) => props.$img});
   width: 100%;
   height: 100%;
+  border-radius: 1em;
 `;
 
 const UserMenuIcon = ({ open, setOpen, img }) => {

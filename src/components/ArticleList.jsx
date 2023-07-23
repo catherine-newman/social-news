@@ -8,11 +8,7 @@ import StyledMain from "./StyledMain";
 import ArticleSort from "./ArticleSort";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
-
-const StyledHeader = styled.h1`
-  padding: 1em;
-  text-align: center;
-`;
+import StyledHeader from "./StyledHeader";
 
 const StyledUL = styled.ul`
   list-style-type: none;
@@ -90,6 +86,8 @@ const ArticleList = () => {
       return <StyledHeader># {topic}</StyledHeader>;
     } else if (author) {
       return <StyledHeader>Articles by {author}</StyledHeader>;
+    } else if (sortBy !== "created_at" || order !== "desc") {
+      return <StyledHeader>All articles</StyledHeader>;
     } else if (pathname === "/") {
       return <StyledHeader>Latest articles</StyledHeader>;
     }

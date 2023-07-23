@@ -4,12 +4,12 @@ import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../contexts/User";
 import BurgerMenuIcon from "./BurgerMenuIcon";
 import BurgerMenuList from "./BurgerMenuList";
-// import { MdLogout } from "react-icons/md";
 import { HiHome } from "react-icons/hi";
 import { FaMoon } from "react-icons/fa";
 import { BiSun } from "react-icons/bi";
 import VisuallyHidden from "./VisuallyHidden";
 import UserMenuIcon from "./UserMenuIcon";
+import UserMenuList from "./UserMenuList";
 
 const HeaderContainer = styled.div`
   background: ${({ theme }) => theme.cardbackground};
@@ -40,10 +40,6 @@ const RightDiv = styled.div`
     gap: 1.5rem;
   }
 `;
-
-// const StyledMdLogout = styled(MdLogout)`
-//   font-size: 1.4rem;
-// `;
 
 const StyledHome = styled(HiHome)`
   cursor: pointer;
@@ -104,47 +100,6 @@ const UserMenu = styled.div`
   }
 `;
 
-// const ExtendedMenu = styled.div`
-//   @media (max-width: 1110px) {
-//     display: none;
-//   }
-//   display: flex;
-//   align-items: center;
-//   gap: 1.5rem;
-//   font-weight: bold;
-// `;
-
-// const Loginout = styled.button`
-//   cursor: pointer;
-//   padding: 1rem 0;
-//   font-weight: normal;
-//   font-size: 0.9rem;
-//   text-transform: uppercase;
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   gap: 0.5rem;
-//   justify-content: center;
-//   background: none;
-//   border: none;
-//   color: ${({ theme }) => theme.text};
-
-//   @media (max-width: 650px) {
-//     text-align: center;
-//   }
-// `;
-
-// const Avatar = styled.img`
-//   height: 2.5em;
-//   border-radius: 1em;
-// `;
-
-// const UserInfo = styled.div`
-//   display: flex;
-//   gap: 1rem;
-//   align-items: center;
-// `;
-
 const useOnClickOutside = (ref, handler) => {
   useEffect(() => {
     const listener = (event) => {
@@ -175,10 +130,6 @@ const HeaderNav = ({ theme, toggleTheme }) => {
     setBurgerOpen(false);
     setUserOpen(false);
   }, [location]);
-
-  // const handleLogoutClick = () => {
-  //   setUser({});
-  // };
 
   return (
     <HeaderContainer>
@@ -214,27 +165,8 @@ const HeaderNav = ({ theme, toggleTheme }) => {
               open={userOpen}
               setOpen={setUserOpen}
             />
+            <UserMenuList open={userOpen} setOpen={setUserOpen} />
           </UserMenu>
-          {/* <ExtendedMenu>
-            {user.username ? (
-              <Link to={`/authors/${user.username}`}>
-                <UserInfo>
-                  <Avatar src={user.avatar_url} alt={user.username} />
-                  {user.username}
-                </UserInfo>
-              </Link>
-            ) : (
-              <Link to="/users">
-                <Loginout>Login</Loginout>
-              </Link>
-            )}
-            {user.username ? (
-              <Loginout onClick={handleLogoutClick}>
-                <div>Logout</div>
-                <StyledMdLogout />
-              </Loginout>
-            ) : null}
-          </ExtendedMenu> */}
         </RightDiv>
       </Header>
     </HeaderContainer>
