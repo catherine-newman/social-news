@@ -1,21 +1,21 @@
 # News Site
 
-An interactive news site that allows users to post, vote and comment on articles. The site allows filtering by topic and multiple sorting options.  
-This site was made using React as the front-end portion of a full stack project, connecting to a back-end API that I created previously.
-Voting, commenting, filtering, sorting, posting and deleting are all handled by this API.
+An interactive news site that allows users to post, vote and comment on articles.  
+Articles can by filtered by topic and author with multiple sorting options.  
+This site was made using React as the front-end portion of a CRUD app, connecting to a API that I built.
 
 A hosted version of this project can be found [here](https://main--subtle-wisp-17479d.netlify.app/).  
 (Please allow 30 seconds for it to spin up before viewing)
 
-This site makes use of a back-end API that I created [here](https://news-api-qn5t.onrender.com/api)  
+This site makes use of a back-end API and database that I built [here](https://news-api-qn5t.onrender.com/api)  
 Github repo: (https://github.com/catherine-newman/news-api)
 
 ## Features
 
-- User content - Post an article to the site. To make a post, please login to the website using one of the provided usernames (click the button for whichever username you want to use).
-- User interaction - Signed in users can comment on an article.
+- User content - Users can post articles. To make a post, please sign in using one of the provided usernames (click the button for whichever username you want to use).
+- User interaction - Users can comment on an article.
 - Comment deletion - Users can delete their own comments.
-- Voting - Anyone can vote on article and comments - login is not necessary.
+- Voting - Anyone can vote on an article or comment - sign in is not necessary.
 
 ## Built using:
 
