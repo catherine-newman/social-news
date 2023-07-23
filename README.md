@@ -14,7 +14,7 @@ Github repo: (https://github.com/catherine-newman/news-api)
 
 - User content - Users can post articles. To make a post, please sign in using one of the provided usernames (click the button for whichever username you want to use).
 - User interaction - Users can comment on an article.
-- Comment deletion - Users can delete their own comments.
+- Content deletion - Users can delete their own articles and comments.
 - Voting - Anyone can vote on an article or comment - sign in is not necessary.
 
 ## Built using:
