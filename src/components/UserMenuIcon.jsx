@@ -14,6 +14,7 @@ const StyledUserMenuIcon = styled.button`
 
 const UserImage = styled.span`
   background: center / contain no-repeat url(${(props) => props.$img});
+  background-color: white;
   width: 100%;
   height: 100%;
   border-radius: 1em;
