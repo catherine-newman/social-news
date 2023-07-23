@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { postArticle, getTopics } from "../api";
 import StyledMain from "./StyledMain";
 import Loading from "./Loading";
+import StyledHeader from "./StyledHeader";
 
 const StyledDiv = styled.div`
   height: 100vh;
@@ -14,11 +15,6 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-`;
-
-const StyledHeader = styled.h1`
-  padding: 1em;
-  text-align: center;
 `;
 
 const StyledForm = styled.form`
@@ -205,7 +201,7 @@ const AddArticle = () => {
         article.article_img_url
       );
     }
-  }, [article, user]);
+  }, [article, navigate, user.username]);
 
   useEffect(() => {
     const fetchTopics = async () => {

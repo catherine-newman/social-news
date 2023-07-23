@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../contexts/User";
 import BurgerMenuIcon from "./BurgerMenuIcon";
-import BurgerMenuList from "./BurgerMenuList";
 import { HiHome } from "react-icons/hi";
 import { FaMoon } from "react-icons/fa";
 import { BiSun } from "react-icons/bi";
@@ -115,10 +114,6 @@ const LoginLink = styled(Link)`
     background-color: ${({ theme }) => theme.secondbuttoncolortoggled};
     transition: background 150ms ease;
   }
-
-  @media (max-width: 550px) {
-    display: none;
-  }
 `;
 
 const useOnClickOutside = (ref, handler) => {
@@ -178,7 +173,7 @@ const HeaderNav = ({ theme, toggleTheme }) => {
           <BurgerMenu ref={burgerNode}>
             {" "}
             <BurgerMenuIcon open={burgerOpen} setOpen={setBurgerOpen} />
-            <BurgerMenuList open={burgerOpen} setOpen={setBurgerOpen} />
+            <UserMenuList open={burgerOpen} setOpen={setBurgerOpen} />
           </BurgerMenu>
           {user.username ? (
             <UserMenu ref={userNode}>
@@ -190,7 +185,9 @@ const HeaderNav = ({ theme, toggleTheme }) => {
               <UserMenuList open={userOpen} setOpen={setUserOpen} />
             </UserMenu>
           ) : (
-            <LoginLink to="/users">Login</LoginLink>
+            <UserMenu>
+              <LoginLink to="/users">Login</LoginLink>
+            </UserMenu>
           )}
         </RightDiv>
       </Header>

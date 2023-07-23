@@ -18,6 +18,13 @@ const StyledMenu = styled.nav`
     0 2px 12px rgba(53, 71, 90, 0.2);
   border-radius: 0.5rem;
   transform: ${({ open }) => (open ? "translateX(0%)" : "translateX(+120%)")};
+
+  @media (max-width: 550px) {
+    width: 100%;
+    box-shadow: none;
+    right: 0;
+    border-radius: none;
+  }
 `;
 
 const LinkList = styled.ul`
@@ -33,6 +40,10 @@ const LinkList = styled.ul`
     color: ${({ open }) =>
       open ? ({ theme }) => theme.text : ({ theme }) => theme.cardbackground};
     transition: color 0.7s ease-in-out;
+    width: 100%;
+  }
+  @media (max-width: 550px) {
+    align-items: center;
   }
 `;
 
@@ -43,12 +54,15 @@ const LinkLi = styled.li`
   gap: 0.7rem;
   padding: 0.5rem 3rem;
   justify-content: start;
-  width: 100%;
   margin: 0;
 
   &:hover {
     background-color: ${({ theme }) => theme.accent};
     transition: background-color 0.2s ease-in-out;
+  }
+
+  @media (max-width: 550px) {
+    justify-content: center;
   }
 `;
 
@@ -56,6 +70,8 @@ const UserSection = styled.div`
   border-top: 1px solid rgba(57, 76, 96, 0.15);
   margin-top: 1rem;
   padding-top: 1rem;
+  width: 100%;
+  text-align: center;
 `;
 
 const StyledMdLogout = styled(MdLogout)`
@@ -75,21 +91,29 @@ const Menu = ({ open, setOpen }) => {
   return (
     <StyledMenu open={open}>
       <LinkList open={open}>
-        <LinkLi>
-          <Link to="/newarticle">Post an article</Link>
-        </LinkLi>
-        <LinkLi>
-          <Link to="/topics">Topics</Link>
-        </LinkLi>
-        <UserSection>
-          <LinkLi>
-            <Link to={`/authors/${user.username}`}>View your articles</Link>
-          </LinkLi>
-          <LinkLi onClick={handleLogoutClick}>
-            <div>Logout</div>
-            <StyledMdLogout />
-          </LinkLi>
-        </UserSection>
+        <Link to="/newarticle">
+          <LinkLi>Post an article</LinkLi>
+        </Link>
+        <Link to="/topics">
+          <LinkLi>Topics</LinkLi>
+        </Link>
+        {user.username ? (
+          <UserSection>
+            <Link to={`/authors/${user.username}`}>
+              <LinkLi>View your articles</LinkLi>
+            </Link>
+            <LinkLi onClick={handleLogoutClick}>
+              <div>Logout</div>
+              <StyledMdLogout />
+            </LinkLi>
+          </UserSection>
+        ) : (
+          <UserSection>
+            <LinkLi>
+              <Link to="/users">Login</Link>
+            </LinkLi>
+          </UserSection>
+        )}
       </LinkList>
     </StyledMenu>
   );
