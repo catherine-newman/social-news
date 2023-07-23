@@ -100,6 +100,27 @@ const UserMenu = styled.div`
   }
 `;
 
+const LoginLink = styled(Link)`
+  background-color: ${({ theme }) => theme.secondbuttoncolor};
+  border: none;
+  color: #000;
+  border-radius: 0.5rem;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+  letter-spacing: 0.05rem;
+  font-weight: bold;
+  transition: background 150ms ease;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.secondbuttoncolortoggled};
+    transition: background 150ms ease;
+  }
+
+  @media (max-width: 550px) {
+    display: none;
+  }
+`;
+
 const useOnClickOutside = (ref, handler) => {
   useEffect(() => {
     const listener = (event) => {
@@ -159,14 +180,18 @@ const HeaderNav = ({ theme, toggleTheme }) => {
             <BurgerMenuIcon open={burgerOpen} setOpen={setBurgerOpen} />
             <BurgerMenuList open={burgerOpen} setOpen={setBurgerOpen} />
           </BurgerMenu>
-          <UserMenu ref={userNode}>
-            <UserMenuIcon
-              img={user.avatar_url}
-              open={userOpen}
-              setOpen={setUserOpen}
-            />
-            <UserMenuList open={userOpen} setOpen={setUserOpen} />
-          </UserMenu>
+          {user.username ? (
+            <UserMenu ref={userNode}>
+              <UserMenuIcon
+                img={user.avatar_url}
+                open={userOpen}
+                setOpen={setUserOpen}
+              />
+              <UserMenuList open={userOpen} setOpen={setUserOpen} />
+            </UserMenu>
+          ) : (
+            <LoginLink to="/users">Login</LoginLink>
+          )}
         </RightDiv>
       </Header>
     </HeaderContainer>

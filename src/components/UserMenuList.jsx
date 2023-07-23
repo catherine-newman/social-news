@@ -75,30 +75,21 @@ const Menu = ({ open, setOpen }) => {
   return (
     <StyledMenu open={open}>
       <LinkList open={open}>
-        {user.username ? (
-          <>
-            <LinkLi>
-              <Link to="/newarticle">Post an article</Link>
-            </LinkLi>
-            <LinkLi>
-              <Link to="/topics">Topics</Link>
-            </LinkLi>
-            <UserSection>
-              <LinkLi>
-                <Link to={`/authors/${user.username}`}>View your articles</Link>
-              </LinkLi>
-              <LinkLi onClick={handleLogoutClick}>
-                <div>Logout</div>
-                <StyledMdLogout />
-              </LinkLi>
-            </UserSection>
-          </>
-        ) : (
-          <>
-            <Link to="/topics">Topics</Link>
-            <Link to="/users">Login</Link>
-          </>
-        )}
+        <LinkLi>
+          <Link to="/newarticle">Post an article</Link>
+        </LinkLi>
+        <LinkLi>
+          <Link to="/topics">Topics</Link>
+        </LinkLi>
+        <UserSection>
+          <LinkLi>
+            <Link to={`/authors/${user.username}`}>View your articles</Link>
+          </LinkLi>
+          <LinkLi onClick={handleLogoutClick}>
+            <div>Logout</div>
+            <StyledMdLogout />
+          </LinkLi>
+        </UserSection>
       </LinkList>
     </StyledMenu>
   );

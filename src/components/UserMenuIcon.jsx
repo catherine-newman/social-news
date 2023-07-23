@@ -20,7 +20,6 @@ const UserImage = styled.span`
 `;
 
 const UserMenuIcon = ({ open, setOpen, img }) => {
-  console.log(img);
   return (
     <StyledUserMenuIcon
       open={open}

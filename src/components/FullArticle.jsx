@@ -39,7 +39,7 @@ const TopicLink = styled(Link)`
   background: ${({ theme }) => theme.accent};
   padding: 0.5rem 1rem;
   text-decoration: none;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   color: ${({ theme }) => theme.text};
   transition:
     color 450ms ease,

@@ -4,12 +4,12 @@ const Button = styled.button`
   background-color: ${({ theme }) => theme.mainbuttoncolor};
   border: none;
   color: #000;
-  border-radius: 1em;
+  border-radius: 0.5rem;
   padding: 0.5rem 2rem;
   margin: auto;
   cursor: pointer;
-  text-transform: uppercase;
-  font-weight: bold;
+  letter-spacing: 0.05rem;
+  font-weight: 600;
   transition: background 150ms ease;
 
   &:hover {
