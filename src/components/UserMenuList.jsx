@@ -10,14 +10,14 @@ const StyledMenu = styled.nav`
   color: ${({ theme }) => theme.text};
   position: absolute;
   top: 4rem;
-  right: 1rem;
+  right: 0;
   z-index: 9;
-  width: auto;
+  width: 17rem;
   box-shadow:
     0 0 0 1px rgba(64, 87, 109, 0.07),
     0 2px 12px rgba(53, 71, 90, 0.2);
   border-radius: 0.5rem;
-  transform: ${({ open }) => (open ? "translateX(0%)" : "translateX(+120%)")};
+  transform: ${({ open }) => (open ? "translateX(0%)" : "translateX(+900%)")};
 
   @media (max-width: 550px) {
     width: 100%;

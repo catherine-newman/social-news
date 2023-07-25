@@ -94,6 +94,7 @@ const BurgerMenu = styled.div`
 `;
 
 const UserMenu = styled.div`
+  position: relative;
   @media (max-width: 550px) {
     display: none;
   }
