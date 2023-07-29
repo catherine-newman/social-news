@@ -89,3 +89,8 @@ export const postArticle = async (
 export const deleteArticle = async (article_id) => {
   await newsApi.delete(`/articles/${article_id}`);
 };
+
+export const getUser = async (username) => {
+  const res = await newsApi.get(`/users/${username}`);
+  return res.data.user;
+};

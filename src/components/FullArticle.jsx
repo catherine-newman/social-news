@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/User";
-import { getArticle, patchArticle, deleteArticle } from "../api";
+import { getArticle, patchArticle, deleteArticle, getUser } from "../api";
 import { formatDate } from "../utilities/formatDate";
 import styled from "styled-components";
 import ArticleVote from "./ArticleVote";
@@ -58,6 +58,23 @@ const TopicLink = styled(Link)`
 
 const AuthorLink = styled(Link)`
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const AuthorDiv = styled.div`
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+`;
+
+const AuthorImage = styled.span`
+  background: center / contain no-repeat url(${(props) => props.$img});
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  border-radius: 2em;
 `;
 
 const ArticleFooter = styled.div`
@@ -84,6 +101,7 @@ const StyledButton = styled(Button)`
 
 const FullArticle = ({ setCommentSubmit, article_id, setError }) => {
   const [article, setArticle] = useState({});
+  const [authorImg, setAuthorImg] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [voteCount, setVoteCount] = useState(0);
   const [upVoteClicked, setUpVoteClicked] = useState(false);
@@ -95,10 +113,13 @@ const FullArticle = ({ setCommentSubmit, article_id, setError }) => {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const res = await getArticle(article_id);
-        setArticle(res);
-        setVoteCount(res.votes);
+        const articleRes = await getArticle(article_id);
+        setArticle(articleRes);
+        setVoteCount(articleRes.votes);
         setIsLoading(false);
+
+        const authorRes = await getUser(articleRes.author);
+        setAuthorImg(authorRes.avatar_url);
       } catch (err) {
         setError(err);
       }
@@ -212,6 +233,9 @@ const FullArticle = ({ setCommentSubmit, article_id, setError }) => {
           <ArticleDetails>
             <div>
               <AuthorLink to={`/authors/${article.author}`}>
+                <AuthorDiv>
+                  <AuthorImage $img={authorImg}></AuthorImage>
+                </AuthorDiv>
                 by {article.author}
               </AuthorLink>
             </div>

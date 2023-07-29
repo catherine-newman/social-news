@@ -5,6 +5,7 @@ import StyledMain from "./StyledMain";
 import { UserContext } from "../contexts/User";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 const Container = styled.div`
   display: grid;
@@ -42,11 +43,13 @@ const StyledButton = styled(Button)`
 const UserLogin = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { user, setUser } = useContext(UserContext);
   useEffect(() => {
     const fetchUsers = async () => {
       const res = await getUsers();
       setUsers(res);
+      setIsLoading(false);
     };
     fetchUsers();
   }, []);
@@ -57,6 +60,8 @@ const UserLogin = () => {
     setUser(newUser);
     navigate(-1);
   };
+
+  if (isLoading) return <Loading>Loading users...</Loading>;
 
   return (
     <StyledMain>
